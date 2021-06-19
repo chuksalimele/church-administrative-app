@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>Bank Statement</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <script>
+            if (typeof $ === "undefined"
+                    || typeof $.mobile === "undefined"
+                    || typeof ChurchApp === "undefined") {
+                //redirect to index page
+                window.location = window.location.protocol + "//" + window.location.host;
+            }
+        </script>
+
+    </head>
+    <body>
+
+        <div data-role="header" data-theme="a">
+            <a href="#" data-icon="home" data-iconpos="notext" data-shadow="false" data-icon-shadow="false">Home</a>
+            <h2>Back Statement</h2>
+            <a href="#bank-statement-related-menu" data-rel="popup" data-transition="slide" class="ui-btn-right ui-btn ui-btn-a ui-btn-inline ui-mini ui-corner-all ui-btn-icon-right ui-icon-check">Related</a>
+
+            <div data-role="navbar">
+                <ul>
+                    <li data-tab-content-id="bank-statement-import-container"><a href="#">Import</a></li>
+                    <li data-tab-content-id="bank-statement-view-imports-container"><a href="#">View Imports</a></li>
+                </ul>
+            </div><!-- /navbar -->
+        </div><!-- /header -->
+        <div data-role="popup" id="bank-statement-related-menu" data-theme="a">
+            <ul data-role="listview" data-inset="true" style="min-width:210px;">
+                <li data-role="list-divider">Related links</li>
+                <li><a href="cash-book.html">Cash book</a></li>
+                <li><a href="account-reconciliation.html">Reconciliation</a></li>
+                <li><a href="service-income.html">Service income</a></li>
+                <li><a href="cheques.html">Cheques</a></li>
+            </ul>
+        </div><!-- /header -->
+
+        <div role="main" class="ui-content">
+
+            <div id="bank-statement-import-container"  style="display: none;">
+
+                <form action="transaction/ImportBankStatement" id="import-bank-statement-form" class="churchapp-form ui-corner-all">
+
+                    <div class="ui-grid-b ui-responsive">
+
+                        <div class="ui-block-a  ui-content">
+
+                        </div>
+                        <div class="ui-block-b ui-content">
+                            <input type="hidden" name="import-bank-statement-username"  id="import-bank-statement-username">
+
+                            <label for="import-bank-statement-bank">Bank</label>
+                            <select name="import-bank-statement-bank" id="import-bank-statement-bank" data-mini="true">
+                                <option value="">Select Bank</option>
+                            </select>
+
+                            <label for="import-bank-statement-file">Bank statement (MS Excel file)</label>
+                            <input name="import-bank-statement-file"  id="import-bank-statement-file"  type="file" data-mini="true">
+
+                            <label for="import-bank-statement-auto-compute-balance">Auto compute balance</label>
+                            <input name="import-bank-statement-auto-compute-balance"  id="import-bank-statement-auto-compute-balance" value="" checked  type="checkbox" data-mini="true">
+
+                            <input name="import-bank-statement-submit"  value="Import Bank Statement"  type="submit"  data-mini="true">
+                        </div>
+                        <div class="ui-block-c  ui-content">
+                            <center>
+                                <div id="import-bank-statement-busy-display" class="import-bank-statement-busy" style="width:150px; height:150px;">
+                                </div>
+                                <div id="import-bank-statement-feedback">
+                                    <!--Importing bank statement...-->
+                                </div>
+                            </center>
+                        </div>
+
+                    </div><!-- /grid-d -->
+                </form>
+
+
+            </div>
+
+            <div id="bank-statement-view-imports-container"  style="display: none;">
+
+
+                <div id="bank-statement-view-imports-table-container" style="display: none;">
+
+                </div>
+
+                <div id="bank-statement-view-imports-statement-container" style="display: none;">
+
+                    <div class="ui-grid-b  ui-responsive">
+                        <div class="ui-block-a">
+                            <img id="bank-statement-view-imports-statement-back-btn" src="img/back_1.jpg" width="80" style="cursor: pointer;" alt="Back"/>
+                        </div>
+                        <div class="ui-block-b">
+                            <h4>
+                                Statement Period - 
+                                <span id="bank-statement-view-imports-statement-period"  style="font-weight: 400;">FEBRUARY, 2016</span>
+                            </h4>
+                        </div>
+                        <div class="ui-block-c">
+                        </div>
+                        <div class="ui-block-a" id="bank-statement-view-imports-statement-bank">
+                            FIRST BANK
+                        </div>
+                        <div class="ui-block-b">
+                        </div>
+                        <div class="ui-block-c">
+                        </div>
+
+                        <div class="ui-block-a" id="bank-statement-view-imports-statement-account-name">
+                            SALARY ACCOUNT
+                        </div>
+
+                        <div class="ui-block-b">
+                        </div>
+                        <div class="ui-block-c">
+                        </div>
+
+                        <div class="ui-block-a" id="bank-statement-view-imports-statement-account-no">
+                            3847594003
+                        </div>
+
+                        <div class="ui-block-b">
+                        </div>
+                        <div class="ui-block-c">
+                            <span  style="font-weight: 700;">Bal BF:</span> 
+                            <span id="bank-statement-view-imports-statement-balance-bf">
+                                3802320.00
+                            </span>
+                        </div>
+                    </div>
+
+                    <div id="bank-statement-view-imports-statement-table">
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div><!-- /content -->
+
+
+        <script>
+
+            $(document).ready(function () {
+                //enter the ids of the tab in the array below according to the nav var arrangement.
+                //the array element can also be an object if you intend to pass  callback
+                //functions upon swipe, in that case the object must have a 'id' member variable name
+                //(the tab id). onTabShow  and onBeforeTabChange are for callback
+                //function
+                var TabIdsStack = ["bank-statement-import-container",
+                                    {
+                                        id: "bank-statement-view-imports-container",
+                                        onTabShow: onViewImportsShow, // callback fuction when tab show on swipe event.
+                                        onBeforeTabChange: checkStatementShowing,
+                                    }];
+                                
+                ChurchApp.createSwipeEvents(TabIdsStack);                
+
+                var prevSelector = $('#bank-statement-view-imports-container');
+                var activeTab = $('[data-tab-content-id="bank-statement-view-imports-container"]').find("a");
+                activeTab.addClass('ui-btn-active');
+                onViewImportsShow("bank-statement-view-imports-container");
+                
+                if (ChurchApp.bank_statement_page_nav_content_focus === "import") {
+                    prevSelector = $('#bank-statement-import-container');
+                    activeTab.removeClass('ui-btn-active');
+                    activeTab = $('[data-tab-content-id="bank-statement-import-container"]').find("a");
+                    activeTab.addClass('ui-btn-active');
+                    
+                }
+
+                ChurchApp.bank_statement_page_nav_content_focus = "";//initialize
+
+                prevSelector.show();
+
+                $("[data-role='navbar'] li").on('click', function (event) {
+                    var id = $(this).attr('data-tab-content-id');
+                    var currentSelector = $("#" + id);
+
+                    //prevSelector.hide();
+                    //currentSelector.show();
+                    
+                    //Preferrably show this tab and make sure all 
+                    //others are hidden since we use click and swipe
+                    //events to show tabs which could cause conflict.
+                    ChurchApp.showTab(true, id, TabIdsStack);
+                    
+                    prevSelector = currentSelector;
+
+                    if (id === "bank-statement-view-imports-container") {
+                        onViewImportsShow(id);
+                    }
+
+                });
+                
+                
+                function checkStatementShowing(){
+                    var isStatementShowing = $("#bank-statement-view-imports-statement-container").is(":visible");
+                    if (isStatementShowing) {
+
+                        $("#bank-statement-view-imports-statement-container").hide();
+                        $("#bank-statement-view-imports-table-container").show();
+                        return false;// do not change the current tab
+                    }
+                    return true;//allow the tab to change -  show next tab.
+                }
+
+                $("#bank-statement-view-imports-statement-back-btn").on('click', function () {
+
+                    $("#bank-statement-view-imports-statement-container").hide();
+                    $("#bank-statement-view-imports-table-container").show();
+                });
+
+                function onViewImportsShow(id) {
+                    //get the imported bank statements
+
+                    $("#bank-statement-view-imports-statement-container").hide();
+                    $("#bank-statement-view-imports-table-container").show();
+
+                    ChurchApp.post("php/query-bank-statement-import.php", null,
+                            function (data) {
+                                var json = JSON.parse(data);
+                                if (json.status === "success") {
+                                    handleReceivedImports(json.data);
+                                } else {
+
+                                }
+                            },
+                            function (data, r, error) {
+
+                            });
+                }
+
+                function handleReceivedImports(data) {
+                    ChurchApp.createTable(
+                            {
+                                columns: data.table_columns,
+                                data: data.table_data,
+                                uniqueColumn: "SN", // e.g primary key , unique 
+                                selectByCheck: true,
+                                action: true,
+                                /*OR  action: {
+                                 view:true,
+                                 delete:true,
+                                 },*/
+                                container: "bank-statement-view-imports-table-container",
+                                filterInputId: "bank-statement-view-imports-table-filter",
+                                deleteButton: true,
+                                viewButton: true,
+                                deleteHandler: function (obj) {
+                                    //properties of obj are majorly plural names
+                                    var selectedIndices = obj.selectedIndices;//array
+                                    var selectedRows = obj.selectedRows;//two dimension array                                    
+                                    var selectedUniqueValues = obj.selectedUniqueValues;// array of selected unique column values
+
+                                    var selectedSerialNos = ChurchApp.Util.toCommaSeparated(selectedUniqueValues);
+                                    var option = confirm("Your have selected " + selectedIndices.length + " row(s) to delete.\n Are you sure you want to proceed.?")
+                                    if (!option) {
+                                        return;
+                                    }
+
+                                    ChurchApp.post("php/delete-bank-statement-import.php",
+                                            {
+                                                selected_serial_nos: selectedSerialNos,
+                                            },
+                                            function (data) {
+                                                var json = JSON.parse(data);
+                                                ChurchApp.alertResponse(json, true);
+                                                if (json.status === "success") {
+                                                    //refresh the view
+                                                    onViewImportsShow(null);
+                                                }
+                                            },
+                                            function (data, r, error) {
+
+                                            });
+                                },
+                                viewHandler: function (obj) {
+                                    //properties of obj are majorly singular names
+                                    var selectedIndex = obj.selectedIndex;//number
+                                    var selectedRow = obj.selectedRow;//array (one dimensional) of cell values of the selected row                                
+                                    var selectedSerialNo = obj.selectedUniqueValue;// value of selected unique column
+
+                                    alert("viewHandler found at " + obj.selectedIndex);
+                                    alert("viewHandler unique " + obj.selectedUniqueValue);
+
+                                    //move to next tab to show the report
+
+                                    ChurchApp.post("php/query-bank-statement-trans.php",
+                                            {
+                                                selected_serial_no: selectedSerialNo,
+                                            },
+                                            function (data) {
+                                                alert(data);
+                                                var json = JSON.parse(data);
+
+                                                if (json.status === "success") {
+                                                    //refresh the view
+                                                    handleRecievedBankStamentTrans(json.data);
+                                                } else {
+                                                    //do something
+                                                }
+                                            },
+                                            function (data, r, error) {
+
+                                            });
+                                },
+                            });
+                }
+
+                function handleRecievedBankStamentTrans(data) {
+
+                    $("#bank-statement-view-imports-table-container").hide();
+                    $("#bank-statement-view-imports-statement-container").show();
+
+                    $("#bank-statement-view-imports-statement-bank").html(data.bank);
+                    $("#bank-statement-view-imports-statement-account-name").html(data.accountName);
+                    $("#bank-statement-view-imports-statement-account-no").html(data.accountNo);
+                    $("#bank-statement-view-imports-statement-period").html(data.month + ", " + data.year);
+                    $("#bank-statement-view-imports-statement-balance-bf").html(data.banlanceBF);
+
+                    ChurchApp.createTable(
+                            {
+                                columns: data.transactions.table_columns,
+                                data: data.transactions.table_data,
+                                container: "bank-statement-view-imports-statement-table",
+                                filterInputId: "bank-statement-view-imports-statement-filter",
+                            });
+
+                }
+
+                ChurchApp.spinPause('import-bank-statement-busy-display');
+
+                ChurchApp.remoteComboBoxFill(
+                        {url: "php/get-bank-list.php",
+                            ids: "import-bank-statement-bank"}
+                );
+
+                //add import bank statement validation
+                $("#import-bank-statement-form").validate({
+                    //validation rules
+                    rules: {
+                        "import-bank-statement-bank": "required",
+                        "import-bank-statement-file": "required",
+                    },
+                    //custom validation message
+                    messages: {
+                    },
+                    submitHandler: function (form) {
+                        ChurchApp.spinRun('import-bank-statement-busy-display');
+                        $("import-bank-statement-feedback").html("Importing bank statement...");
+                        $("import-bank-statement-username").val(ChurchApp.user.username);
+                        ChurchApp.postForm(form,
+                                function (data) {//done
+                                    ChurchApp.spinPause('import-bank-statement-busy-display');
+                                    var json = JSON.parse(data);
+                                    if (json.status === "success") {
+                                        $("import-bank-statement-feedback").html("Imported successfully!");
+                                    } else {
+                                        if (json.msg !== null && json.msg !== "") {
+                                            $("import-bank-statement-feedback").html(msg);
+                                        } else {
+                                            $("import-bank-statement-feedback").html("Could not imported bank statement!");
+                                        }
+                                    }
+
+                                },
+                                function (data, r, error) {//fail
+                                    ChurchApp.spinPause('import-bank-statement-busy-display');
+                                    $("import-bank-statement-feedback").html("Check your internet connection!"
+                                            + "<br/>Could not import bank statement.");
+                                });
+                    }
+
+                });
+
+                $(document).bind("pagecreate", function (e, data) {
+                    //do not put click event here
+                });
+
+            });
+
+        </script>
+
+
+    </body>
+</html>

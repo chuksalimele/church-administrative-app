@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>Department</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <script>
+            if (typeof $ === "undefined"
+                    || typeof $.mobile === "undefined"
+                    || typeof ChurchApp === "undefined") {
+                //redirect to index page
+                window.location = window.location.protocol + "//" + window.location.host;
+            }
+        </script>
+
+    </head>
+    <body>
+
+        <div data-role="header" style="overflow:hidden;">
+            <a data-rel="back" class="ui-btn ui-btn-left ui-alt-icon ui-nodisc-icon ui-corner-all ui-btn-icon-notext ui-icon-carat-l">Back</a>
+            <h1>Add Department</h1>
+            <button class="department-show-departments-added ui-btn-right ui-btn ui-btn-a ui-btn-inline ui-mini ui-corner-all ui-btn-icon-right ui-icon-check">View</button>
+        </div><!-- /header -->
+
+        <div>
+
+            <div data-role="main" class="ui-content" style="max-width: 600px; margin:  0 auto;">
+
+                <form method="post" action="php/add-department.php" id="department-form">
+
+                    <div class="ui-field-contain">
+                        <label for="department" >Department</label>
+                        <input data-clear-btn="true" name="department" id="department" type="text"/>
+                    </div>
+                    <div class="ui-field-contain">
+                        <a  class="department-show-departments-added" href="#">Show departments added</a>
+                    </div>
+                    <div class="ui-field-contain">
+                        <input  name="department-add" id="department-add" type="submit" value="Add Department" />
+                    </div>
+
+                </form>
+
+            </div>
+
+        </div>
+
+        <script>
+
+            $(document).ready(function () {
+
+                $(".department-show-departments-added").on("click", function () {
+
+                    ChurchApp.post("php/query-department.php",
+                            {
+                            },
+                            function (data) {//done
+                                alert(data);
+                                var json = JSON.parse(data);
+                                if (json.status === "success") {
+                                    ChurchApp.changeAndRenderTablePage({
+                                        tableTitle: json.data.table_title,
+                                        tableColumns: json.data.table_columns,
+                                        tableData: json.data.table_data,
+                                        style: ChurchApp.DisplayStyle.A,
+                                        pageId: "table-view-page-content",
+                                        pageTitle: "Departments",
+                                        headerTitle: "Showing Departments Added",
+                                        updateUrl: "php/update-department.php",
+                                        deleteUrl: "php/delete-department.php",
+                                        inactivityTimeout: 180,
+                                        useDefaultUneditables: true, //which are SN, ENTRY_USER_ID and ENTRY_DATETIME 
+                                        uneditableColumns: ["SN", "ENTRY_USER_ID", "ENTRY_DATETIME", ],
+                                        validationRules: {
+                                            "DEPARTMENT": "required"
+                                        },
+                                        validationMessages: {
+                                            //"DEPARTMENT": "Please enter this field."
+                                        },
+                                    });
+
+                                }
+                            },
+                            function (data, r, error) {//fail
+
+                            });
+
+                });
+
+                //add department validation
+                $("#department-form").validate({
+                    //validation rules
+                    rules: {
+                        "department": "required"
+                    },
+                    //custom validation message
+                    messages: {
+                    },
+                    submitHandler: function (form) {
+
+                        ChurchApp.postForm(form,
+                                function (data) {//done
+                                    alert(data);
+                                },
+                                function (data, r, error) {//fail
+
+                                });
+                    }
+
+                });
+
+                $(document).bind("pagecreate", function (e, data) {
+
+                });
+            });
+
+
+
+        </script>
+    </body>
+</html>

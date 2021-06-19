@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>Authorization</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <script>
+            if (typeof $ === "undefined"
+                    || typeof $.mobile === "undefined"
+                    || typeof ChurchApp === "undefined") {
+                //redirect to index page
+                window.location = window.location.protocol + "//" + window.location.host;
+            }
+        </script>
+
+    </head>
+    <body>
+
+        <div data-role="header" style="overflow:hidden;">
+            <a data-rel="back" class="ui-btn ui-btn-left ui-alt-icon ui-nodisc-icon ui-corner-all ui-btn-icon-notext ui-icon-carat-l">Back</a>
+            <h1>Authorization</h1>
+            <button id="authorization_save_changes" class="ui-btn-right ui-btn ui-btn-a ui-btn-inline ui-mini ui-corner-all ui-btn-icon-right ui-icon-check">Save Changes</button>
+        </div><!-- /header -->
+
+
+        <div class="ui-content">
+
+            <div class="ui-grid-b ui-responsive" id="authorization-responsive">  
+                <input id="authorization-search-user" data-type="search" placeholder="Find a user...">
+                <div class="ui-grid-d  ui-responsive">
+                    <div class="ui-block-a">
+                    </div>
+                    <div class="ui-block-b">
+                    </div>
+                    <div class="ui-block-c">
+                    </div>
+                    <div class="ui-block-d">
+                        <a href="#" id="authorization-search-user-next" class="ui-btn  ui-mini ui-alt-icon ui-nodisc-icon ui-icon-arrow-r">Next >></a> 
+                    </div>
+                    <div class="ui-block-e">
+                        <a href="#" id="authorization-search-user-previous" class="ui-btn  ui-mini ui-alt-icon ui-nodisc-icon ui-icon-arrow-l"><< Previous</a>  
+                    </div>
+                </div> 
+                <ul id="authorization_autocomplete" data-role="listview" data-inset="true" data-split-icon="user">
+                    <!--Will be populated dynamically  -->
+
+                </ul>
+
+            </div>
+
+            <form method="post" action="#" id="authorization_form">
+
+                <div class="ui-grid-b  ui-responsive">
+                    <div class="ui-block-a">
+                        <div class="ui-content">    
+                            <label for="authorization_username" >Username </label>
+                            <input data-clear-btn="false" name="authorization_username" readonly id="authorization_username" type="text"/>
+                        </div>
+                    </div>
+                    <div class="ui-block-b">
+                        <div class="ui-content">    
+                            <label for="authorization_fullname" >Full name</label>
+                            <input data-clear-btn="false" name="authorization_fullname" readonly id="authorization_fullname" type="text"/>
+                        </div>
+                    </div>
+                    <div class="ui-block-c">
+                        <div class="ui-content">   
+                            <label for="authorization_designation" >Designation</label>
+                            <input  data-clear-btn="false" name="authorization_designation" readonly id="authorization_designation" type="text"/>
+                        </div>
+                    </div>
+                    <div class="ui-block-a">
+                        <div class="ui-content"> 
+                            <label for="authorization_block_user" >Block user account</label>
+                            <input name="authorization_block_user" id="authorization_block_user" type="checkbox">
+                        </div>
+                    </div>                    
+                </div>
+
+                <fieldset id="authorization_assign_privilege" data-role="collapsible" data-collapsed="false">
+                    <legend>Assign privileges</legend>
+
+                    <div class="ui-grid-b ui-responsive">
+
+                        <div class="ui-block-a ui-content">
+                            <div class="ui-field-contain">
+                                <label for="authorization_admin" >Administrator</label>
+                                <input name="authorization_admin" id="authorization_admin" type="checkbox" onclick="createInnerComponent(this, 'admin')">
+                            </div>
+
+                            <div class="ui-field-contain">
+                                <label for="authorization_accountant" >Accountant</label>
+                                <input name="authorization_accountant" id="authorization_accountant" type="checkbox" onclick="createInnerComponent(this, 'accountant')">
+                            </div>
+
+                            <div class="ui-field-contain ui-content">
+                                <label for="authorization_pastor" >Pastor</label>
+                                <input name="authorization_pastor" id="authorization_pastor" type="checkbox" onclick="createInnerComponent(this, 'pastor')">
+                            </div>
+                        </div>
+
+                        <div class="ui-block-b ui-content">
+
+                            <div class="ui-field-contain">
+                                <label for="authorization_worker" >Worker</label>
+                                <input name="authorization_worker" id="authorization_worker" type="checkbox" onclick="createInnerComponent(this, 'worker')">
+                            </div>
+
+                            <div class="ui-field-contain">
+                                <label for="authorization_men_exco" >Men Exco</label>
+                                <input name="authorization_men_exco" id="authorization_men_exco" type="checkbox" onclick="createInnerComponent(this, 'men_exco')">
+                            </div>
+
+                            <div class="ui-field-contain">
+                                <label for="authorization_women_exco" >Women Exco</label>
+                                <input name="authorization_women_exco" id="authorization_women_exco" type="checkbox" onclick="createInnerComponent(this, 'women_exco')">
+                            </div>
+                        </div>
+
+                        <div class="ui-block-c ui-content">
+
+                            <div class="ui-field-contain">
+                                <label for="authorization_youth_exco" >Youth Exco</label>
+                                <input name="authorization_youth_exco" id="authorization_youth_exco" type="checkbox" onclick="createInnerComponent(this, 'youth_exco')">
+                            </div>
+
+                            <div class="ui-field-contain">
+                                <label for="authorization_member" >Member</label>
+                                <input name="authorization_member" id="authorization_member" type="checkbox" onclick="createInnerComponent(this, 'member')">
+                            </div>
+
+                            <div class="ui-field-contain">
+                                <label for="authorization_children" >Children</label>
+                                <input name="authorization_children" id="authorization_children" type="checkbox" onclick="createInnerComponent(this, 'children')">
+                            </div>
+                        </div>
+
+                    </div><!-- /grid-b -->
+
+                </fieldset>
+
+
+                <div data-role="collapsibleset" data-content-theme="a" data-iconpos="right" id="authorization_features">
+                    <!--<div data-role="collapsible" id="set1" data-collapsed="true">
+                        <h3>Section 1</h3>
+                        <p>I'm the collapsible content.</p>
+                    </div>--->
+                    <!-- Content will be dynamic-->
+                </div>
+
+            </form>
+
+        </div>
+
+        <script>
+
+            $(document).ready(function () {
+
+                $("#authorization-search-user-next").on("click", function (evt) {
+                    var search_name = $("#authorization-search-user").val();
+                    ChurchApp.authorizeFindUser.findUser("next", search_name, 5);
+                });
+
+                $("#authorization-search-user-previous").on("click", function (evt) {
+                    var search_name = $("#authorization-search-user").val();
+                    ChurchApp.authorizeFindUser.findUser("previous", search_name, 5);
+                });
+
+                $("#authorization-search-user").on("keyup", function (evt) {
+                    var search_name = $("#authorization-search-user").val();
+                    ChurchApp.authorizeFindUser.findUser("", search_name, 5);
+                });
+
+                $("#authorization_save_changes").on("click", function () {
+                    if ($.trim($("#authorization_username").val()).length === 0)
+                    {
+                        alert("No user!");
+                        return;
+                    }
+                    var username = document.getElementById("authorization_username").value;
+
+                    var block_account = "0";
+                    if (document.getElementById("authorization_block_user").checked) {
+                        block_account = "1";
+                    }
+
+
+                    var user_group_arr = [];
+                    if (document.getElementById("authorization_admin").checked) {
+                        user_group_arr[user_group_arr.length] = "Admin";
+                    }
+                    if (document.getElementById("authorization_accountant").checked) {
+                        user_group_arr[user_group_arr.length] = "Accountant";
+                    }
+                    if (document.getElementById("authorization_pastor").checked) {
+                        user_group_arr[user_group_arr.length] = "Pastor";
+                    }
+                    if (document.getElementById("authorization_worker").checked) {
+                        user_group_arr[user_group_arr.length] = "Worker";
+                    }
+                    if (document.getElementById("authorization_men_exco").checked) {
+                        user_group_arr[user_group_arr.length] = "Men Exco";
+                    }
+                    if (document.getElementById("authorization_women_exco").checked) {
+                        user_group_arr[user_group_arr.length] = "Women Exco";
+                    }
+                    if (document.getElementById("authorization_youth_exco").checked) {
+                        user_group_arr[user_group_arr.length] = "Youth Exco";
+                    }
+                    if (document.getElementById("authorization_member").checked) {
+                        user_group_arr[user_group_arr.length] = "Member";
+                    }
+                    if (document.getElementById("authorization_children").checked) {
+                        user_group_arr[user_group_arr.length] = "Children";
+                    }
+
+                    //json array
+                    var unviewable_features_json
+                            = ChurchApp.createUnviewableFeaturesJSON(user_group_arr);
+
+                    var user_groups = "";
+                    for (var i = 0; i < user_group_arr.length; i++) {
+                        user_groups += i === 0 ? user_group_arr[i] : ("," + user_group_arr[i]);
+                    }
+                    unviewable_features_json = JSON.stringify(unviewable_features_json);
+                    ChurchApp.post("php/UserAuthorization.php",
+                            {
+                                username: username,
+                                block_account: block_account,
+                                user_groups: user_groups,
+                                unviewable_features_json: unviewable_features_json,
+                            },
+                            function (data) {//done
+                                alert(data);
+                            },
+                            function (data, r, error) {//fail
+
+                            });
+                });
+
+                $(document).bind("pagecreate", function (e, data) {
+                    //do not put click event here
+                });
+            });
+
+
+        </script>
+
+    </body>
+</html>

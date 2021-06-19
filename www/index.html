@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+
+
+        <meta charset="UTF-8">
+        <!--<meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *">-->
+        <meta name="format-detection" content="telephone=no">
+        <meta name="msapplication-tap-highlight" content="no">
+        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+        <title>Church Mega App</title>
+
+        <!--<link rel="stylesheet"  href="css/jquery.mobile-1.4.5.min.css">-->
+        <link rel="stylesheet"  href="css/redeem-theme.css">	
+        <link rel="stylesheet"  href="css/jquery.mobile.icons-1.4.5.min.css">
+        <link rel="stylesheet"  href="css/jquery.mobile.structure-1.4.5.min.css">
+
+        <link rel="stylesheet"  href="css/church_app_main.css">	
+        <link rel="stylesheet"  href="css/entry_validator.css">	
+
+        <link rel="stylesheet" href="css/jquery.mobile.datepicker.css" />
+        <link rel="stylesheet" href="css/jquery.mobile.datepicker.theme.css" />
+        <link rel="stylesheet" type="text/css" href="./slick/slick.css">
+        <link rel="stylesheet" type="text/css" href="./slick/slick-theme.css">
+
+        <script type="text/javascript" src="cordova.js"></script><!-- Important -->
+        <script src="js/jquery-1.10.2.min.js"></script>
+        <script src="js/jquery.mobile-1.4.5.min.js"></script>
+        <script src="js/jquery-ui/datepicker.min.js"></script>
+        <script src="js/jquery.mobile.datepicker.min.js"></script>
+        <script src="js/libs/jquery-validate/jquery.validate.min.js"></script>
+        <script src="js/libs/jquery-validate/additional-methods.min.js"></script>
+        <script src="slick/slick.min.js"></script>
+        <script src="js/spin.min.js"></script>
+        <script src="js/jquery.spin.js"></script>
+
+        <script type="text/javascript" src="js/index.js"></script>
+
+        <script type="text/javascript" src="js/app/church_app_main.js"></script>
+        <script type="text/javascript" src="js/app/controls.js"></script>
+        <script type="text/javascript" src="js/app/entry_validator.js"></script>
+        <script type="text/javascript" src="js/app/view_record.js"></script>
+
+        <style>
+            .custom-corners .ui-bar {
+                -webkit-border-top-left-radius: inherit;
+                border-top-left-radius: inherit;
+                -webkit-border-top-right-radius: inherit;
+                border-top-right-radius: inherit;
+            }
+            .custom-corners .ui-body {
+                border-top-width: 0;
+                -webkit-border-bottom-left-radius: inherit;
+                border-bottom-left-radius: inherit;
+                -webkit-border-bottom-right-radius: inherit;
+                border-bottom-right-radius: inherit;
+            }
+        </style>
+        
+    </head>
+
+    <body>
+        <div data-url="splash-screen-page" data-role="page" id="splash-screen-page">
+            <div data-role="main" class="ui-content">
+                <a href="#login-page" data-role="button" data-transition="slide" >test 1</a>
+                <a href="#assign-to-parish-page" data-role="button" data-transition="slide" >test 2</a>
+                <a href="account-reconciliation.html" data-role="button" data-transition="slide" >test 3</a>
+
+            </div>
+        </div><!-- splash screen page end -->
+
+        <!--testing start--->
+        <div data-role="page" id="test_table">
+            <div id="mytes"></div>
+        </div>
+        <!--testing end--->
+
+
+        <div data-url="login-page" data-role="page" id="login-page">
+
+            <div data-role="header">
+                <h1>MercyApp</h1>
+                <a href="#sign-up-page" class="ui-btn-right ui-btn ui-btn-inline ui-mini ui-corner-all ui-btn-icon-right ui-icon-user" name="btn_login_sign_up" id="btn_login_sign_up" data-transition="slide">Sign up</a>
+
+            </div><!-- /header -->
+
+            <div data-role="main" class="ui-content">
+                <form method="post" id="login_form" name="login_form" action="php/LoginUser.php"  style="max-width: 600px; margin: 0 auto;"> 
+                    <div class="ui-corner-all custom-corners" style="">
+                        <div class="ui-bar ui-bar-a" >
+                            <h3>Login</h3>
+                        </div>
+
+                        <div class="ui-body ui-body-a"> 
+                            <input data-clear-btn="true" name="txt_login_username" id="txt_login_username" value="" placeholder="Enter your username" type="text">
+                            <input data-clear-btn="true" name="txt_login_password" id="txt_login_password" value="" placeholder="Enter your password" type="password">
+
+                            <div class="ui-field-contain">
+                                <label for="cbo_login_group">Group:</label>
+                                <select name="cbo_login_group" id="cbo_login_group" data-mini="true">
+                                    <option value="Member">Member</option>
+                                    <option value="Children">Children</option>
+                                    <option value="Worker">Worker</option>
+                                    <option value="Admin">Admin</option>
+                                    <option value="Super Admin">Super Admin</option>
+                                    <option value="Pastor">Pastor</option>
+                                    <option value="Accountant">Accountant</option>
+                                    <option value="Men Exco">Men Exco</option>
+                                    <option value="Women Exco">Women Exco</option>
+                                    <option value="Youth Exco">Youth Exco</option>
+                                </select>
+                            </div>
+
+                            <div class="ui-field-contain">
+                                <label for="cbo_login_role">Role:</label>
+                                <select name="cbo_login_role" id="cbo_login_role" data-mini="true">
+                                    <option value=""></option>
+                                    <option value="President">President</option>
+                                    <option value="Vice President">Vice President</option>
+                                    <option value="Secretary">Secretary</option>
+                                    <option value="PRO">PRO</option>
+                                    <option value="Treasurer">Treasurer</option>
+                                </select>
+                            </div>
+
+                            <div class="ui-field-contain">
+                                <input name="btn_login_sign_in" id="btn_login_sign_in" data-icon="lock" data-mini="true" data-transition="slide" type="submit" value="Sign in"/>
+                            </div> 
+
+                            <div class="ui-field-contain">
+                                <label for="chk_keep_me_signed_in">Keep me signed in</label>                           
+                                <input data-mini="true" name="chk_keep_me_signed_in" id="chk_keep_me_signed_in" checked="" type="checkbox"/>
+                            </div> 
+
+                            <div class="ui-grid-c  ui-responsive">
+                                <div class="ui-block-a">
+                                    <div class="ui-field-contain">                
+                                        <a href="#forgot-password-page" name="btn_login_forgot_password" id="btn_login_forgot_password" data-transition="slide">Forgot Password?</a>
+                                    </div> 
+                                </div>
+                                <div class="ui-block-b">
+
+                                </div>
+                                <div class="ui-block-c">
+
+                                </div>
+                                <div class="ui-block-d">
+                                    <div class="ui-field-contain">
+                                        <a href="#help-dialog" name="btn_login_help" id="btn_login_help">Need help?</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div> 
+                </form>
+            </div>
+        </div><!-- login page end -->
+
+
+
+
+        <div data-url="answer-parish-question-page" data-role="page" id="answer-parish-question-page">
+            <div data-role="header">
+                <h1>MercyApp</h1>
+                <a data-rel="back" class="ui-btn ui-btn-left ui-alt-icon ui-nodisc-icon ui-corner-all ui-btn-icon-notext ui-icon-carat-l">Back</a>
+            </div><!-- /header -->
+
+            <div data-role="main" class="ui-content">
+
+                <h1>Hi, <span data-name ="hi-user-full-name" style="font-size: large;" >Full name</span></h1>
+                <p data-name ="steps-away-from-sign-up-completion"></p>
+
+                <form>
+                    <fieldset data-role="controlgroup">
+                        <legend>Please choose the option that best describe your parish.</legend>
+                        <input name="radio-choice-v-2" id="radio-choice-v-2a" value="national" type="radio">
+                        <label for="radio-choice-v-2a">My parish is a national headquarter</label>
+
+                        <input name="radio-choice-v-2" id="radio-choice-v-2b" value="regional" type="radio">
+                        <label for="radio-choice-v-2b">My parish is a regional headquarter</label>
+
+                        <input name="radio-choice-v-2" id="radio-choice-v-2c" value="provincial" type="radio">
+                        <label for="radio-choice-v-2c">My parish is a provincial headquarter</label>
+
+                        <input name="radio-choice-v-2" id="radio-choice-v-2d" value="zonal" type="radio">
+                        <label for="radio-choice-v-2d">My parish is a zonal headquarter</label>
+
+                        <input name="radio-choice-v-2" id="radio-choice-v-2e" value="area" type="radio">
+                        <label for="radio-choice-v-2e">My parish is an area headquarter</label>
+
+                        <input name="radio-choice-v-2" id="radio-choice-v-2f" value="none" type="radio">
+                        <label for="radio-choice-v-2f">My parish  is none of the above</label>
+                    </fieldset>
+                    <label class="error" id="next_parish_question_error" style="display:none;">You have not made any selection!</label>
+                    <input  name="btn_next_parish_question" id="btn_next_parish_question" class="ui-btn ui-btn-inline ui-mini ui-corner-all ui-btn-icon-right ui-icon-action" value="Next" type="button"/>
+                </form>
+            </div>
+
+        </div><!-- answer-parish-question-page -->        
+
+        <div data-url="assign-to-parish-page" data-role="page" id="assign-to-parish-question-page">
+            <div data-role="header">
+                <h1>MercyApp</h1>
+                <a data-rel="back" class="ui-btn ui-btn-left ui-alt-icon ui-nodisc-icon ui-corner-all ui-btn-icon-notext ui-icon-carat-l">Back</a>
+            </div><!-- /header -->
+
+            <div data-role="main" class="ui-content">
+                <h1>Hi, <span data-name ="hi-user-full-name" style="font-size: large;">Full name</span></h1>
+                <p id="assign-to-parish-explain">Please select the division your parish is under.</p>
+                <form action="php/AssignParishToUser.php" id="assign-to-parish-form">
+                    <div class="ui-field-contain" id="assign-to-parish-under-national-cont">
+                        <label for="assign-to-parish-under-national">Under National</label>
+                        <select name="assign-to-parish-under-national" id="assign-to-parish-under-national" data-mini="true">
+                            <option value="">Select national</option>
+                        </select>
+                    </div>
+
+                    <div class="ui-field-contain" id="assign-to-parish-under-region-cont">
+                        <label for="assign-to-parish-under-region">Under region</label>
+                        <select name="assign-to-parish-under-region" id="assign-to-parish-under-region" data-mini="true">
+                            <option value="">Select region</option>
+                        </select>
+                    </div>
+
+                    <div class="ui-field-contain" id="assign-to-parish-under-province-cont">
+                        <label for="assign-to-parish-under-province">Under province</label>
+                        <select name="assign-to-parish-under-province" id="assign-to-parish-under-province" data-mini="true">
+                            <option value="">Select province</option>
+                        </select>
+                    </div>
+
+                    <div class="ui-field-contain" id="assign-to-parish-under-zone-cont">
+                        <label for="assign-to-parish-under-zone">Under zone</label>
+                        <select name="assign-to-parish-under-zone" id="assign-to-parish-under-zone" data-mini="true">
+                            <option value="">Select zone</option>
+                        </select>
+                    </div>
+
+                    <div class="ui-field-contain" id="assign-to-parish-under-area-cont">
+                        <label for="assign-to-parish-under-area">Under area</label>
+                        <select name="assign-to-parish-under-area" id="assign-to-parish-under-area" data-mini="true">
+                            <option value="">Select area</option>
+                        </select>
+                    </div>
+                    <p  id="assign-to-parish-note">If your selection(s) above are correct your parish will be enlisted  in the drop-down list below. Otherwise your parish is not yet registered with our service, so please check back later. </p>
+                    <div class="ui-field-contain">
+                        <label for="assign-to-parish-name">Parish</label>
+                        <select name="assign-to-parish-name" id="assign-to-parish-name" data-mini="true">
+                            <option value="">Select parish</option>
+                        </select>
+                    </div>
+
+                    <div class="ui-field-contain">
+                        <input  name="register-parish-register" id="register-parish-register" type="submit" value="OK" data-mini="true"/>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div data-url="email-verification-page" data-role="page" id="email-verification-page">
+            <div data-role="header">
+                <h1>MercyApp</h1>
+                <a data-rel="back" class="ui-btn ui-btn-left ui-alt-icon ui-nodisc-icon ui-corner-all ui-btn-icon-notext ui-icon-carat-l">Back</a>
+            </div><!-- /header -->
+
+            <div data-role="main" class="ui-content">
+
+            </div>
+        </div>
+
+        <div data-url="forgot-password-page" data-role="page" id="forgot-password-page">
+            <div data-role="header">
+                <h1>MercyApp</h1>
+                <a data-rel="back" class="ui-btn ui-btn-left ui-alt-icon ui-nodisc-icon ui-corner-all ui-btn-icon-notext ui-icon-carat-l">Back</a>
+            </div><!-- /header -->
+
+            <div data-role="main" class="ui-content">
+                <form  method="post" action="#" style="max-width: 600px; margin: 0 auto;">
+                    <div class="ui-corner-all custom-corners">
+                        <div class="ui-bar ui-bar-a">
+                            <h3>Forgot Password</h3>
+                        </div>
+                        <div class="ui-body ui-body-a">
+                            <div data-role="main" class="ui-content">
+                                <input data-clear-btn="true" name="txt_forgot_password_username" id="txt_forgot_password_username" value="" placeholder="Enter your username" type="text">
+                                <input data-clear-btn="true" name="txt_forgot_password_email" id="txt_forgot_password_email" value="" placeholder="Enter your email address" type="text">
+                                <input name="txt_forgot_password_recover" id="txt_forgot_password_recover" value="Recover my password"  type="button">
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+        </div><!-- forgot password page end -->        
+
+        <div data-url="sign-up-page" data-role="page" id="sign-up-page">
+            <div data-role="header">
+                <h1>MercyApp</h1>
+                <a data-rel="back" class="ui-btn ui-btn-left ui-alt-icon ui-nodisc-icon ui-corner-all ui-btn-icon-notext ui-icon-carat-l">Back</a>
+            </div><!-- /header -->
+
+            <div data-role="main" class="ui-content">
+
+                <form  action="php/SignUp.php" id="sign_up_form" name="sign_up_form" method="post" style="max-width: 600px; margin: 0 auto;" >
+                    <div class="ui-corner-all custom-corners">
+                        <div class="ui-bar ui-bar-a">
+                            <h3>Sign Up</h3>
+                        </div>
+
+                        <div class="ui-body ui-body-a"> 
+                            <div data-role="main" class="ui-content">
+
+                                <label for="txt_sign_up_first_name" >First name:</label>
+                                <input data-clear-btn="true" name="txt_sign_up_first_name" id="txt_sign_up_first_name" type="text">
+
+                                <label for="txt_sign_up_last_name" >Last name:</label>
+                                <input data-clear-btn="true" name="txt_sign_up_last_name" id="txt_sign_up_last_name" type="text">
+
+                                <label for="txt_sign_up_email" >Email:</label>
+                                <input data-clear-btn="true" name="txt_sign_up_email" id="txt_sign_up_email" type="text">
+
+                                <label for="txt_sign_up_username" >Username:</label>
+                                <input data-clear-btn="true" name="txt_sign_up_username" id="txt_sign_up_username" type="text">
+
+                                <label for="txt_sign_up_password" >Password:</label>
+                                <input data-clear-btn="true" name="txt_sign_up_password" id="txt_sign_up_password"  type="password">
+
+                                <label for="txt_sign_up_password_again" >Password again:</label>
+                                <input data-clear-btn="true" name="txt_sign_up_password_again" id="txt_sign_up_password_again"  type="password">
+
+                                <center>       
+                                    <input  name="txt_sign_up_send" data-mini="true" data-inline="true" data-icon="action" id="txt_sign_up_send"  value="Send" type="submit"/>
+                                    <a data-rel="back" name="txt_sign_up_cancel" id="txt_sign_up_cancel" class="ui-btn ui-btn-inline ui-mini ui-corner-all ui-btn-icon-left ui-icon-delete" >Cancel</a>
+                                </center>
+                            </div>
+                        </div>
+                    </div></form>
+            </div>
+        </div><!-- sign up page end -->
+
+
+        <div data-url="help-dialog" data-role="dialog" id="help-dialog">
+
+            <div data-role="header">
+                <h1>Help</h1>
+            </div><!-- /header -->
+
+            <div id="help_dialog_content">
+                <!-- Help content goes here - Content will be dynamically created-->
+                <p>The is help dialog</p>
+            </div>
+        </div><!--Help dialog end-->
+
+
+        <script>
+
+            $(document).ready(function () {
+
+                ChurchApp.setScrollFixedNavTop("home-page-nav", 80);
+
+            });
+
+        </script>
+
+    </body>
+
+</html>

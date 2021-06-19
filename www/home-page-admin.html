@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>Administrator</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <script>
+            if (typeof $ === "undefined"
+                    || typeof $.mobile === "undefined"
+                    || typeof ChurchApp === "undefined") {
+                //redirect to index page
+                window.location = window.location.protocol + "//" + window.location.host;
+            }
+        </script>
+        
+    </head>
+    <body>
+        <div data-role="header" style="overflow:hidden;">
+            <h1>MercyApp</h1>
+            <a href="#home-page-admin-left-nav-panel" class="ui-btn ui-btn-left ui-alt-icon ui-nodisc-icon ui-btn-icon-notext ui-icon-bars menu-fixed">Menu</a>
+            <!--<a href="#" data-icon="gear" class="ui-btn ui-btn-inline ui-mini ui-corner-all ui-btn-icon-right ui-icon-gear">Options</a>-->
+            <div class="ui-btn ui-btn-inline ui-btn-right ui-mini ui-corner-all">
+                <img class="user-profile-photo" src="_assets/img/lumia_800.png" width="45" height="45" alt="User"/>
+            </div>
+            <div data-role="navbar" class="home-page-nav">
+                <ul>
+                    <li><a href="#" data-icon="home" >Home</a></li>
+                    <li><a href="#" data-icon="user" >Profile</a></li>
+                    <li><a href="#home-page-popup-misc-menu" data-rel="popup" data-transition="slide" data-icon="bars" >Misc</a></li>
+                </ul>
+            </div><!-- /navbar -->
+        </div><!-- /header -->
+
+        <div data-role="popup" id="home-page-popup-misc-menu" data-theme="a">
+            <ul data-role="listview" data-inset="true" style="min-width:210px;">
+                <li data-role="list-divider">Menu</li>
+                <li data-icon="comment"><a href="chat.html">Chat</a></li>
+                <li  data-privilege-disabled="false" data-privilege="privilege-sms"
+                     data-icon="mail"><a href="sms.html">SMS</a></li>                
+                <li  data-privilege-disabled="false" data-privilege="privilege-voice-call"
+                     data-icon="phone"><a href="voice-call.html">Voice call</a></li>
+                <li  data-privilege-disabled="false" data-privilege="privilege-conference-meeting"
+                     data-icon="phone"><a href="conference-meeting.html">Conference meeting</a></li>
+                <li data-icon="location"><a href="maps.html">Maps</a></li>
+                <li data-icon="gear"><a href="settings.html">Settings</a></li>
+                <li data-icon="user"><a href="#">Log out</a></li>
+            </ul>
+        </div>
+
+        <div id="home-page-admin-content" data-name="churchapp-news-content" class="ui-content"></div>
+
+        <div data-role="panel" class="churchapp-left-panel" data-display="overlay" id="home-page-admin-left-nav-panel" >
+
+            <div class="churchapp-left-panel-header" >
+                <div>
+                    <img class="header-parish-photo" src="img/redeem_logo.png" width="80" height="80" alt="Parish Photo N/A"/>
+                </div>
+                <span class="header-parish-name">Name of parish goes here</span>
+            </div>
+
+            <ul data-role="listview" class="home_left_menu_above">
+                <li><a href="#">My profile</a></li>
+            </ul>
+
+            <div class="home_left_menu_below">
+
+                <div data-privilege="privilege-configuration" data-role="collapsible" data-inset="false">
+                    <h3>Configuration</h3>
+
+                    <div data-role="listview">
+                        <ul data-role="listview">
+                            <li data-privilege="privilege-authorization"><a href="authorization.html" data-transition="slide">Authorization</a></li>
+                            <li data-privilege="privilege-news-post"><a href="news-post.html">News Post</a></li>
+                            <li data-privilege="privilege-department"><a href="department.html">Department</a></li>
+                            <li data-privilege="privilege-designation"><a href="designation.html">Designation</a></li>
+                            <li data-privilege="privilege-monetary"><a href="monetary.html">Monetary</a></li>
+                        </ul>
+                        <!--Church Structure collapsible menu start-->
+                        <div data-privilege="privilege-church-structure" data-role="collapsible" data-inset="false" class="home_menu_adjust">
+                            <h3>Church Structure</h3>
+                            <ul data-role="listview">
+                                <li data-privilege="privilege-register-parish-and-super-admin"><a href="register-parish-and-super-admin.html">Register Parish/Super Admin</a></li>
+                                <li data-privilege="privilege-update-parish"><a href="update-parish.html">Update Parish</a></li>
+                            </ul>
+                        </div>
+
+                        <!--Activities collapsible menu start-->
+                        <div data-privilege="privilege-activities" data-role="collapsible" data-inset="false" class="home_menu_adjust">
+                            <h3>Activities </h3>
+                            <ul data-role="listview">
+                                <li data-privilege="privilege-service"><a href="service-type.html">Service</a></li>
+                                <li data-privilege="privilege-event"><a href="event.html">Event</a></li>
+                            </ul>
+                        </div>
+
+
+                    </div>
+                </div>
+
+                <div data-privilege="privilege-entry-report" data-role="collapsible" data-inset="false">
+                    <h3>Entry/Report</h3>
+                    <div data-role="listview">
+                        <ul data-role="listview">
+                            <li data-privilege="privilege-daily-activities-schedule"><a href="daily-activities-schedule.html">Daily Activities Schedule</a></li>
+                            <li data-privilege="privilege-membership"><a href="membership.html">Membership</a></li>
+                        </ul>
+                        <!--Income Summary collapsible menu start-->
+                        <div data-privilege="privilege-income-summary" data-role="collapsible" data-inset="false" class="home_menu_adjust">
+                            <h3>Income Summary</h3>
+                            <ul data-role="listview">
+                                <li data-privilege="privilege-service-income"><a href="service-income-entry.html">Service Income</a></li>
+                                <li data-privilege="privilege-daily-income"><a href="daily-income.html">Daily Income</a></li>
+                            </ul>
+                        </div>
+
+                        <!--Events collapsible menu start-->
+                        <div  data-privilege="privilege-events" data-role="collapsible" data-inset="false" class="home_menu_adjust">
+                            <h3>Events</h3>
+                            <ul data-role="listview">
+                                <li data-privilege="privilege-birthday"><a href="birthday.html">Birthday</a></li>
+                                <li data-privilege="privilege-wedding"><a href="wedding.html">Wedding</a></li>
+                                <li data-privilege="privilege-child-dedication"><a href="child-dedication.html">Child Dedication</a></li>
+                                <li data-privilege="privilege-member-thanksgiving"><a href="member-thanksgiving.html">Member Thanksgiving</a></li>
+                            </ul>
+                        </div>
+
+                        <!--Weekly Activities  collapsible menu start-->
+                        <div  data-privilege="privilege-weekly-activities" data-role="collapsible" data-inset="false" class="home_menu_adjust">
+                            <h3>Weekly Activities</h3>
+                            <ul data-role="listview">
+                                <li data-privilege="privilege-home-fellowship"><a href="home-fellowship.html">Home Fellowship</a></li>
+                                <li data-privilege="privilege-digging-deep"><a href="digging-deep.html">Digging Deep</a></li>
+                                <li data-privilege="privilege-faith-clinic"><a href="faith-clinic.html">Faith Clinic</a></li>
+                                <li data-privilege="privilege-rehearsal"><a href="rehearsal.html">Rehearsal</a></li>
+                            </ul>
+                        </div>
+
+
+                        <!--Monthly Activities  collapsible menu start-->
+                        <div  data-privilege="privilege-monthly-activities" data-role="collapsible" data-inset="false" class="home_menu_adjust">
+                            <h3>Monthly Activities</h3>
+                            <ul data-role="listview">
+                                <li data-privilege="privilege-general-thanksgiving"><a href="general-thanksgiving.html">General Thanksgiving  </a></li>
+                            </ul>
+                        </div>
+
+                    </div>
+                </div>
+
+
+            </div>
+
+        </div><!-- /panel -->
+
+
+    </body>
+</html>

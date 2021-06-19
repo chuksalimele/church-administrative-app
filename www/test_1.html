@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+
+
+        <meta charset="UTF-8">
+        <!--<meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *">-->
+        <meta name="format-detection" content="telephone=no">
+        <meta name="msapplication-tap-highlight" content="no">
+        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+        <title>Church Mega App</title>
+
+        <link rel="stylesheet"  href="css/jquery.mobile-1.4.5.min.css">	
+        <link rel="stylesheet"  href="css/church_app_main.css">	
+        <link rel="stylesheet"  href="css/entry_validator.css">	
+
+        <link rel="stylesheet" href="css/jquery.mobile.datepicker.css" />
+        <link rel="stylesheet" href="css/jquery.mobile.datepicker.theme.css" />
+
+
+        <script type="text/javascript" src="cordova.js"></script><!-- Important -->
+        <script src="js/jquery-1.10.2.min.js"></script>
+        <script src="js/jquery.mobile-1.4.5.min.js"></script>
+        <script src="js/jquery-ui/datepicker.min.js"></script>
+        <script src="js/jquery.mobile.datepicker.min.js"></script>
+        <script src="js/libs/jquery-validate/jquery.validate.min.js"></script>
+        <script src="js/libs/jquery-validate/additional-methods.min.js"></script>
+        <script src="slick/slick.min.js"></script>
+        <script type="text/javascript" src="js/app/church_app_main.js"></script>
+        <script type="text/javascript" src="js/app/controls.js"></script>
+        <script type="text/javascript" src="js/app/entry_validator.js"></script>
+        <script type="text/javascript" src="js/app/view_record.js"></script>
+
+    </head>
+
+    <body>
+        <div data-privilege="privilege-div1">
+            <div data-privilege="privilege-div2">
+                <p data-privilege="privilege-book1">book1</p>
+                <p data-privilege="privilege-book2">book2</p>
+                <p data-privilege="privilege-book3">book3</p>
+            </div>
+            <div data-privilege="privilege-div3">
+            </div>
+        </div>
+        <div id="test_cover">
+            <!--<input type="text" name="test" value="43" />
+            <!--<input type="text" name="test"  value="53" />
+            <!--<input type="text" name="test"  value="63" />
+            <!--<input type="checkbox" id="my_check" />-->
+            
+            
+        </div>
+        
+        <div id="me1" style="display: none;">
+            
+            ME 11111111
+            
+        </div>
+        
+        
+        <div id="me2"  style="display: none;">
+            
+            ME 22222222
+        </div>
+        
+        <script> 
+            
+            //alert("attr_value".substring("attr".length));
+            $(document).ready(function () {
+              // document.getElementById("my_check").checked = true;
+               $("#me2").show();
+               $("#me2").hide();
+               $("#me1").show();
+                /*var els = $('[data-privilege^="privilege-"]');
+                 alert("start");
+                 els.each(function (index, element) {
+                 alert(index +" " +element);
+                 });
+                 
+                 alert("end");*/
+
+                /*var e = document.getElementById("test_cover");
+                $(e).on('click',"[name='test']", function () {
+                    alert($(this).val());
+                });*/
+
+            });
+
+            /*ChurchApp.privilegeSet.init();
+             ChurchApp.privilegeSet.add("a", "1");
+             ChurchApp.privilegeSet.add("a", "2");
+             ChurchApp.privilegeSet.add("a", "3");
+             
+             ChurchApp.privilegeSet.add("b", "1b");
+             ChurchApp.privilegeSet.add("b", "2b");
+             ChurchApp.privilegeSet.add("b", "3b");
+             ChurchApp.privilegeSet.add("b", "4b");
+             ChurchApp.privilegeSet.add("b", "5b");
+             
+             alert(ChurchApp.privilegeSet.get("b"));
+             
+             ChurchApp.privilegeSet.remove("a", "1");
+             ChurchApp.privilegeSet.remove("a", "2");
+             ChurchApp.privilegeSet.remove("a", "3");
+             
+             ChurchApp.privilegeSet.remove("b", "2b");
+             
+             alert(ChurchApp.privilegeSet.get("a"));
+             alert(ChurchApp.privilegeSet.get("b"));
+             */
+        </script>
+
+    </body>
+
+</html>

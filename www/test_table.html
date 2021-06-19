@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+
+
+        <meta charset="UTF-8">
+        <!--<meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *">-->
+        <meta name="format-detection" content="telephone=no">
+        <meta name="msapplication-tap-highlight" content="no">
+        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+        <title>Church Mega App</title>
+
+        <!--<link rel="stylesheet"  href="css/jquery.mobile-1.4.5.min.css">-->
+        <link rel="stylesheet"  href="css/redeem-theme.css">	
+        <link rel="stylesheet"  href="css/jquery.mobile.icons-1.4.5.min.css">
+        <link rel="stylesheet"  href="css/jquery.mobile.structure-1.4.5.min.css">
+
+        <link rel="stylesheet"  href="css/church_app_main.css">	
+        <link rel="stylesheet"  href="css/entry_validator.css">	
+
+        <link rel="stylesheet" href="css/jquery.mobile.datepicker.css" />
+        <link rel="stylesheet" href="css/jquery.mobile.datepicker.theme.css" />
+        <link rel="stylesheet" type="text/css" href="./slick/slick.css">
+        <link rel="stylesheet" type="text/css" href="./slick/slick-theme.css">
+
+        <script type="text/javascript" src="cordova.js"></script><!-- Important -->
+        <script src="js/jquery-1.10.2.min.js"></script>
+        <script src="js/jquery.mobile-1.4.5.min.js"></script>
+        <script src="js/jquery-ui/datepicker.min.js"></script>
+        <script src="js/jquery.mobile.datepicker.min.js"></script>
+        <script src="js/libs/jquery-validate/jquery.validate.min.js"></script>
+        <script src="js/libs/jquery-validate/additional-methods.min.js"></script>
+        <script src="slick/slick.min.js"></script>
+        <script src="js/spin.min.js"></script>
+        <script src="js/jquery.spin.js"></script>
+
+        <script type="text/javascript" src="js/index.js"></script>
+
+        <script type="text/javascript" src="js/app/church_app_main.js"></script>
+        <script type="text/javascript" src="js/app/controls.js"></script>
+        <script type="text/javascript" src="js/app/entry_validator.js"></script>
+        <script type="text/javascript" src="js/app/view_record.js"></script>
+
+    </head>
+    <body>
+
+        <div id="test_table_container_id" ><!-- id format is "load-internal-<followed by the filename>" --->
+
+            
+        </div>
+
+        <script>
+            
+            ChurchApp.createTable(
+                            {
+                                columns: ["col_1", "col_2", "col_3"],
+                                data: [["a1", "a2", "a3"], ["b1", "b2", "b3"], ["c1", "c2", "c3"]],
+                                uniqueColumn: "col_1", // e.g primary key , unique 
+                                selectByCheck: true,
+                                action: true,
+                                /*OR  action: {
+                                 view:true,
+                                 delete:true,
+                                 },*/
+                                container: "test_table_container_id",
+                                filterInputId: "test_table_filter_id",
+                                deleteButton: true,
+                                viewButton: true,
+                                deleteHandler: function (obj) {
+                                    //properties of obj are majorly plural
+                                    var selectedIndices = obj.selectedIndices;//array
+                                    var selectedRows = obj.selectedRows;//two dimension array                                    
+                                    var selectedUniqueValues = obj.selectedUniqueValues;// array of selected unique column values
+
+                                    
+                                    for(var i=0; i<selectedUniqueValues.length; i++){
+                                        alert("unique = "+selectedUniqueValues[i]);
+                                    }
+                                },
+                                viewHandler: function (obj) {
+                                    //properties of obj are majorly singular
+                                    var selectedIndex = obj.selectedIndex;//number
+                                    var selectedRow = obj.selectedRow;//array (one dimensional) of cell values of the selected row                                
+                                    var selectedUniqueValue = obj.selectedUniqueValue;// value of selected unique column
+
+                                    alert("viewHandler found at " + obj.selectedIndex);
+                                    alert("viewHandler unique " + selectedUniqueValue);
+                                },
+                            });
+
+        </script>
+    </body>
+
+</html>

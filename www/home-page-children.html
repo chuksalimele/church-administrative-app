@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>Accountant</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+        <script>
+            if (typeof $ === "undefined"
+                    || typeof $.mobile === "undefined"
+                    || typeof ChurchApp === "undefined") {
+                //redirect to index page
+                window.location = window.location.protocol + "//" + window.location.host;
+            }
+        </script>
+        
+    </head>
+    <body>
+        <div data-role="header" style="overflow:hidden;">
+            <h1>MercyApp</h1>
+            <a href="#home-page-children-left-nav-panel" class="ui-btn ui-btn-left ui-alt-icon ui-nodisc-icon ui-btn-icon-notext ui-icon-bars menu-fixed">Menu</a>
+            <!--<a href="#" data-icon="gear" class="ui-btn ui-btn-inline ui-mini ui-corner-all ui-btn-icon-right ui-icon-gear">Options</a>-->
+            <div class="ui-btn ui-btn-inline ui-btn-right ui-mini ui-corner-all">
+                <img class="user-profile-photo" src="_assets/img/lumia_800.png" width="45" height="45" alt="User"/>
+            </div>
+            <div data-role="navbar" class="home-page-nav">
+                <ul>
+                    <li><a href="#" data-icon="home" >Home</a></li>
+                    <li><a href="#" data-icon="user" >Profile</a></li>
+                    <li><a href="#home-page-popup-misc-menu" data-rel="popup" data-transition="slide" data-icon="bars" >Misc</a></li>
+                </ul>
+            </div><!-- /navbar -->
+        </div><!-- /header -->
+        
+        <div data-role="popup" id="home-page-popup-misc-menu" data-theme="a">
+                <ul data-role="listview" data-inset="true" style="min-width:210px;">
+                    <li data-role="list-divider">Menu</li>
+                    <li data-icon="comment"><a href="chat.html">Chat</a></li>
+                    <li data-icon="location"><a href="maps.html">Maps</a></li>
+                    <li data-icon="gear"><a href="settings.html">Settings</a></li>
+                    <li data-icon="user"><a href="#">Log out</a></li>
+                </ul>
+        </div>
+        
+        
+        <div id="home-page-children-content" class="ui-content">
+
+
+
+        </div>
+
+        <div data-role="panel" class="churchapp-left-panel" data-display="overlay" id="home-page-children-left-nav-panel">
+
+            <div class="churchapp-left-panel-header" >
+                <div>
+                    <img class="header-parish-photo" src="img/redeem_logo.png" width="80" height="80" alt="Parish Photo N/A"/>
+                </div>
+                <span class="header-parish-name">Name of parish goes here</span>
+            </div>
+
+            <ul data-role="listview" class="home_left_menu_above">
+                <li><a href="#">My profile</a></li>
+            </ul>
+
+            <div data-privilege="privilege-entry" data-role="collapsible" data-inset="false">
+                <h3>Entry</h3>
+
+                <ul data-role="listview">
+                    <!--
+                    <li data-privilege="privilege-service-income"><a href="service_income_entry.html">Service Income</a></li>
+                    <li data-privilege="privilege-cash-book"><a href="cash_book_entry.html">Cash Book</a></li>
+                    -->
+                </ul>
+            </div>
+
+            <div data-privilege="privilege-report" data-role="collapsible" data-inset="false">
+                <h3>Report</h3>
+                <ul data-role="listview">
+                    <!--
+                    <li data-privilege="privilege-service-income-report"><a href="#">Service Income Report</a></li>
+                    <li data-privilege="privilege-daily-activities-schedule"><a href="#">Daily Activities Schedule</a></li>
+                    <li data-privilege="privilege-daily-income-report"><a href="#">Daily Income Report</a></li>
+                    <li data-privilege="privilege-bank-statement"><a href="#">Bank Statement</a></li>
+                    <li data-privilege="privilege-budget-summary"><a href="#">Budget Summary</a></li>
+                    <li data-privilege="privilege-statement-of-appropriation"><a href="#">Statement Of Appropriation</a></li>
+                    <li data-privilege="privilege-fund-transferred"><a href="#">Funds Transferred</a></li>
+                    <li data-privilege="privilege-funds-requested"><a href="#">Funds Requested</a></li>
+                    <li data-privilege="privilege-cheque"><a href="#">Cheques</a></li>
+                    -->
+                </ul>
+            </div>
+
+
+        </div>
+
+    </body>
+</html>

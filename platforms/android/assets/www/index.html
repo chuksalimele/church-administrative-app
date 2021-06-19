@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+
+
+        <meta charset="UTF-8">
+        <!--<meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *">-->
+        <meta name="format-detection" content="telephone=no">
+        <meta name="msapplication-tap-highlight" content="no">
+        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+        <title>Church Mega App</title>
+
+        <link rel="stylesheet"  href="css/jquery.mobile-1.4.5.min.css">	
+        <link rel="stylesheet"  href="css/church_app_main.css">	
+
+        <script type="text/javascript" src="cordova.js"></script><!-- Important -->
+        <script src="js/jquery-1.10.2.min.js"></script>
+        <script src="js/jquery.mobile-1.4.5.min.js"></script>
+        <script type="text/javascript" src="js/index.js"></script>
+        <script type="text/javascript" src="js/church_app_main.js"></script>
+    </head>
+    <style>
+        .custom-corners .ui-bar {
+            -webkit-border-top-left-radius: inherit;
+            border-top-left-radius: inherit;
+            -webkit-border-top-right-radius: inherit;
+            border-top-right-radius: inherit;
+        }
+        .custom-corners .ui-body {
+            border-top-width: 0;
+            -webkit-border-bottom-left-radius: inherit;
+            border-bottom-left-radius: inherit;
+            -webkit-border-bottom-right-radius: inherit;
+            border-bottom-right-radius: inherit;
+        }
+    </style>
+    <body>
+        <div data-url="splash-screen-page" data-role="page" id="splash-screen-page">
+            <div data-role="main" class="ui-content">
+                <a href="#login-page" data-role="button" data-transition="slide" ></a>
+
+            </div>
+        </div><!-- splash screen page end -->
+
+
+        <div data-url="login-page" data-role="page" id="login-page">
+
+            <div data-role="header">
+                <h1>Chuapp</h1>
+                <a href="#sign-up-page" class="ui-btn-right ui-btn ui-btn-inline ui-mini ui-corner-all ui-btn-icon-right ui-icon-user" name="btn_login_sign_up" id="btn_login_sign_up" data-transition="slide">Sign up</a>
+
+            </div><!-- /header -->
+
+            <div data-role="main" class="ui-content">
+
+                <div class="ui-corner-all custom-corners">
+                    <div class="ui-bar ui-bar-a">
+                        <h3>Login</h3>
+                    </div>
+
+                    <div class="ui-body ui-body-a"> 
+                        <input data-clear-btn="true" name="txt_login_username" id="txt_login_username" value="" placeholder="Enter your username" type="text">
+                        <input data-clear-btn="true" name="txt_login_password" id="txt_login_password" value="" placeholder="Enter your password" type="password">
+
+                        <div class="ui-field-contain">
+                            <label for="cbo_login_dept">Dept:</label>
+                            <select name="cbo_login_dept" id="cbo_login_dept" data-mini="true">
+                                <option value="1">The 1st Option</option>
+                                <option value="2">The 2nd Option</option>
+                                <option value="3">The 3rd Option</option>
+                                <option value="4">The 4th Option</option>
+                            </select>
+                        </div>
+
+                        <div class="ui-field-contain">
+                            <label for="cbo_login_role">Role:</label>
+                            <select name="cbo_login_role" id="cbo_login_role" data-mini="true">
+                                <option value="1">The 1st Option</option>
+                                <option value="2">The 2nd Option</option>
+                                <option value="3">The 3rd Option</option>
+                                <option value="4">The 4th Option</option>
+                            </select>
+                        </div>
+
+                        <center>
+                            <a href="#home-page" name="btn_login_sign_in" id="btn_login_sign_in" class="ui-btn ui-btn-inline ui-mini ui-corner-all ui-btn-icon-right ui-icon-lock" data-transition="slide">Sign in</a>
+                        </center>
+
+                        <label for="chk_keep_me_signed_in">Keep me signed in</label>                           
+                        <input data-mini="true" name="chk_keep_me_signed_in" id="chk_keep_me_signed_in" checked="" type="checkbox">
+
+                        <div>                
+                            <a href="#forgot-password-page" name="btn_login_forgot_password" id="btn_login_forgot_password" data-transition="slide">Forgot Password?</a>
+                        </div>              
+                        <a href="#help-dialog" name="btn_login_help" id="btn_login_help">Need help?</a></div>
+                </div> 
+            </div>
+        </div><!-- login page end -->
+
+        <div data-url="forgot-password-page" data-role="page" id="forgot-password-page">
+            <div data-role="header">
+                <h1>Chuapp</h1>
+                <a data-rel="back" class="ui-btn ui-btn-left ui-alt-icon ui-nodisc-icon ui-corner-all ui-btn-icon-notext ui-icon-carat-l">Back</a>
+            </div><!-- /header -->
+
+            <div data-role="main" class="ui-content">
+                <div class="ui-corner-all custom-corners">
+                    <div class="ui-bar ui-bar-a">
+                        <h3>Forgot Password</h3>
+                    </div>
+                    <div class="ui-body ui-body-a">
+                        <div data-role="main" class="ui-content">
+
+                            <input data-clear-btn="true" name="txt_forgot_password_username" id="txt_forgot_password_username" value="" placeholder="Enter your username" type="text">
+                            <input data-clear-btn="true" name="txt_forgot_password_email" id="txt_forgot_password_email" value="" placeholder="Enter your email address" type="text">
+                            <input name="txt_forgot_password_recover" id="txt_forgot_password_recover" value="Recover my password"  type="button">
+                        </div>
+                    </div>
+                </div></div data-role="main" class="ui-content">
+
+        </div><!-- forgot password page end -->        
+
+
+        <div data-url="sign-up-page" data-role="page" id="sign-up-page">
+            <div data-role="header">
+                <h1>Chuapp</h1>
+                <a data-rel="back" class="ui-btn ui-btn-left ui-alt-icon ui-nodisc-icon ui-corner-all ui-btn-icon-notext ui-icon-carat-l">Back</a>
+            </div><!-- /header -->
+
+            <div data-role="main" class="ui-content">
+
+                <div class="ui-corner-all custom-corners">
+                    <div class="ui-bar ui-bar-a">
+                        <h3>Sign Up</h3>
+                    </div>
+
+                    <div class="ui-body ui-body-a"> 
+                        <div data-role="main" class="ui-content">
+
+                            <label for="txt_sign_up_first_name" >First name:</label>
+                            <input data-clear-btn="true" name="txt_sign_up_first_name" id="txt_sign_up_first_name" type="text">
+
+                            <label for="txt_sign_up_last_name" >Last name:</label>
+                            <input data-clear-btn="true" name="txt_sign_up_last_name" id="txt_sign_up_last_name" type="text">
+
+                            <label for="txt_sign_up_email" >Email:</label>
+                            <input data-clear-btn="true" name="txt_sign_up_email" id="txt_sign_up_email" type="text">
+
+                            <label for="txt_sign_up_username" >Username:</label>
+                            <input data-clear-btn="true" name="txt_sign_up_username" id="txt_sign_up_username" type="text">
+
+                            <label for="txt_sign_up_password" >Password:</label>
+                            <input data-clear-btn="true" name="txt_sign_up_password" id="txt_sign_up_password"  type="password">
+
+                            <label for="txt_sign_up_password_again" >Password again:</label>
+                            <input data-clear-btn="true" name="txt_sign_up_password_again" id="txt_sign_up_password_again"  type="password">
+
+                            <center>
+                                <a  name="txt_sign_up_send" id="txt_sign_up_send" class="ui-btn ui-btn-inline ui-mini ui-corner-all ui-btn-icon-right ui-icon-action" >Send</a>
+                                <a data-rel="back" name="txt_sign_up_cancel" id="txt_sign_up_cancel" class="ui-btn ui-btn-inline ui-mini ui-corner-all ui-btn-icon-right ui-icon-delete" >Cancel</a>
+                            </center>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div><!-- sign up page end -->
+
+
+        <div data-url="help-dialog" data-role="dialog" id="help-dialog">
+
+            <div data-role="header">
+                <h1>Help</h1>
+            </div><!-- /header -->
+
+            <div id="help_dialog_content">
+                <!-- Help content goes here - Content will be dynamically created-->
+                <p>The is help dialog</p>
+            </div>
+        </div><!--Help dialog end-->
+
+
+        <div data-url="home-page" data-role="page" id="home-page" class ="ui-responsive-panel" >
+
+            <div data-role="header" style="overflow:hidden;">
+                <h1>I'm a header</h1>
+                <a href="#home-page-left-nav-panel" class="ui-btn ui-btn-left ui-alt-icon ui-nodisc-icon ui-btn-icon-notext ui-icon-bars">Menu</a>
+                <!--<a href="#" data-icon="gear" class="ui-btn ui-btn-inline ui-mini ui-corner-all ui-btn-icon-right ui-icon-gear">Options</a>-->
+                <div class="ui-btn ui-btn-inline ui-btn-right ui-mini ui-corner-all">
+                    <img src="_assets/img/lumia_800.png" width="45" height="45" alt="User"/>
+                </div>
+                <div data-role="navbar">
+                    <ul>
+                        <li><a href="#" data-icon="home" >Home</a></li>
+                        <li><a href="#" data-icon="user" >Profile</a></li>
+                        <li><a href="#" data-icon="gear" >Options</a></li>
+                    </ul>
+                </div><!-- /navbar -->
+            </div><!-- /header -->
+
+            <div id="home-page-content" class="ui-content">
+
+                <div class="ui-grid-b ui-responsive" >
+                    <!-- Content will be generated dynamically - Content is base on privilege-->
+
+                    <!--
+                    <div class="ui-block-a"><div class="ui-bar ui-bar-a ui-shadow" style="height:60px;margin: 5px;">Block A</div></div>
+                    <div class="ui-block-b"><div class="ui-bar ui-bar-a ui-shadow" style="height:60px;margin: 5px;">Block B</div></div>
+                    <div class="ui-block-c"><div class="ui-bar ui-bar-a ui-shadow" style="height:60px;margin: 5px;">Block C</div></div>
+                    <div class="ui-block-a"><div class="ui-bar ui-bar-a ui-shadow" style="height:60px;margin: 5px;">Block A</div></div>
+                    <div class="ui-block-b"><div class="ui-bar ui-bar-a ui-shadow" style="height:60px;margin: 5px;">Block B</div></div>
+                    <div class="ui-block-c"><div class="ui-bar ui-bar-a ui-shadow" style="height:60px;margin: 5px;">Block C</div></div>
+                    <div class="ui-block-a"><div class="ui-bar ui-bar-a ui-shadow" style="height:60px;margin: 5px;">Block A</div></div>
+                    <div class="ui-block-b"><div class="ui-bar ui-bar-a ui-shadow" style="height:60px;margin: 5px;">Block B</div></div>
+                    <div class="ui-block-c"><div class="ui-bar ui-bar-a ui-shadow" style="height:60px;margin: 5px;">Block C</div></div>
+                    
+                </div><!-- /grid-c -->
+
+                </div>
+
+
+                <div data-role="panel" data-display="overlay" id="home-page-left-nav-panel">
+
+                    <!-- This home page left panel will be dynamically populated base on user privilege-->
+                    <ul data-role="listview" id="home_left_menu_above" style="margin-bottom: -1px;">
+                        <li data-icon="delete"><a href="#" data-rel="close">Close</a></li>
+                        <li><a href="#panel-responsive-page2">My profile</a></li>
+                    </ul>
+
+                    <div id="home_left_menu_below">
+                        <!--Content here will be populated dynamically based on privilege-->
+
+                    </div>
+
+                </div><!-- /panel -->
+
+            </div><!--Home page end-->
+
+
+            <script>
+                
+                $(document).ready(function () {
+                    //Register event handlers
+                    alert("Yes the jquery is ready AGAIN!");
+                });
+                
+                var chApp = new ChurchApp();
+
+                $(document).ready(function () {
+                     
+                    $(document).bind("pagebeforechange", function (e, data) {
+                        // We only want to handle changePage() calls where the caller is asking to load a page by URL.
+
+                        var transition = choosePageTransition();
+
+                        if (chApp.Util.endsWithStr(data.toPage, "#home-page")) {
+                            showHome(data, transition);
+                            e.preventDefault();
+                        } else if (chApp.Util.endsWithStr(data.toPage, "#login-page")) {
+                            showLogin(data, transition);
+                            e.preventDefault();
+                        }
+
+                    });
+                });
+
+                function choosePageTransition() {
+                    if (window.screen.width <= 768) {
+                        return "slide";//tablets and smart phones
+                    }
+                    return "none";//desktops and laptops
+                }
+
+                function showLogin(data, transition) {
+
+                    var page = $("#login-page");
+
+
+                    // Now call changePage() and tell it to switch to the page we just modified.
+                    $.mobile.changePage(page, {
+                        transition: transition,
+                        reverse: true
+                                //,
+                                //changeHash: false
+                    });
+
+                }
+
+                function showHome(data, transition) {
+
+                    var page = $("#home-page");
+
+                    // Get the content area element for the page.
+                    var content = page.find("#home-page-content");
+
+
+                    // Get the left menu element for the page.
+                    var left_menu = page.find("#home_left_menu_below");
+                    //page.page();
+                    //e.preventDefault();
+                    // The markup we are going to inject into the content area of the page.
+
+
+                    left_menu.html(new chApp.Admin().adminLeftMenuHTML());
+
+                    //we will use trigger('create') to enhance in this case. Read doc on different ways of enhancement
+                    left_menu.trigger('create');//important! enhance the collapisble using trigger('create')
+
+                    //content.html(markup);
+
+                    // Now call changePage() and tell it to switch to the page we just modified.
+                    $.mobile.changePage(page, {
+                        transition: transition,
+                        reverse: true
+                                //,
+                                //changeHash: false
+                    });
+
+                }
+            </script>
+
+    </body>
+
+</html>

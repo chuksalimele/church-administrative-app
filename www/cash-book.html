@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>Cash Book</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <script>
+            if (typeof $ === "undefined"
+                    || typeof $.mobile === "undefined"
+                    || typeof ChurchApp === "undefined") {
+                //redirect to index page
+                window.location = window.location.protocol + "//" + window.location.host;
+            }
+        </script>
+
+    </head>
+    <body>
+
+        <div data-role="header" data-theme="a">
+            <a href="#" data-icon="home" data-iconpos="notext" data-shadow="false" data-icon-shadow="false">Home</a>
+            <h2>Cash Book</h2>
+            <a href="#cash-book-related-menu" data-rel="popup" data-transition="slide" class="ui-btn-right ui-btn ui-btn-a ui-btn-inline ui-mini ui-corner-all ui-btn-icon-right ui-icon-check">Related</a>
+
+            <div data-role="navbar">
+                <ul>
+                    <li data-tab-content-id="cash-book-post-container"><a href="#">Post</a></li>
+                    <li data-tab-content-id="cash-book-import-container"><a href="#">Import</a></li>
+                    <li data-tab-content-id="cash-book-view-imports-container"><a href="#">View Imports</a></li>
+                    <li data-tab-content-id="cash-book-reports-container"><a href="#">Reports</a></li>
+                </ul>
+            </div><!-- /navbar -->
+        </div><!-- /header -->
+        <div data-role="popup" id="cash-book-related-menu" data-theme="a">
+            <ul data-role="listview" data-inset="true" style="min-width:210px;">
+                <li data-role="list-divider">Related links</li>
+                <li><a href="bank-statement.html">Bank statement</a></li>
+                <li><a href="account-reconciliation.html">Reconciliation</a></li>
+                <li><a href="service-income.html">Service income</a></li>
+                <li><a href="cheques.html">Cheques</a></li>
+            </ul>
+        </div>
+
+        <div role="main" class="ui-content">
+
+            <div id="cash-book-post-container"  style="display: none;">
+
+                <form method="post" action="php/post-cash-book.php" id="cash-book-entry-form">
+
+                    <div class="ui-field-contain">  
+                        <label for="cash_book_date" >Date:</label>
+                        <input class="date-input"  data-role="date" data-inline="false" name="cash_book_date" id="cash_book_date" type="date"/>
+                    </div>
+
+                    <div class="ui-field-contain">
+                        <label for="cash_book_bank" >Bank:</label>
+                        <input data-clear-btn="true" name="cash_book_bank" id="cash_book_bank" type="text"/>
+                    </div>
+
+                    <div class="ui-field-contain">
+                        <label for="cash_book_account_name" >Account name:</label>
+                        <input data-clear-btn="true" name="cash_book_account_name" id="cash_book_account_name" type="text"/>
+                    </div>
+
+                    <div class="ui-field-contain">
+                        <label for="cash_book_account_no" >Account no:</label>
+                        <input data-clear-btn="true" name="cash_book_account_no" id="cash_book_account_no" type="text"/>
+                    </div>
+
+                    <div class="ui-field-contain">
+                        <label for="cash_book_tran_code" >Tran. code:</label>
+                        <input data-clear-btn="true" name="cash_book_tran_code" id="cash_book_tran_code" type="text"/>
+                    </div>
+
+                    <div class="ui-field-contain">
+                        <label for="cash_book_description" >Description:</label>
+                        <textarea data-clear-btn="true" name="cash_book_description" id="cash_book_description"  ></textarea>
+                    </div>
+
+                    <div class="ui-field-contain">
+                        <select name="cash_book_tran_type" id="cash_book_tran_type" data-mini="true">
+                            <option value="">Select Tran. Type</option>
+                            <option value="Debit">Debit</option>
+                            <option value="Credit">Credit</option>
+                        </select>
+                    </div>
+
+                    <div class="ui-field-contain">
+                        <label for="cash_book_amount" >Amount:</label>
+                        <input data-clear-btn="true" name="cash_book_amount" id="cash_book_amount"  type="number"/>
+
+                    </div>
+
+                    <div class="ui-field-contain">
+                        <input  name="cash_book_post" id="cash_book_post" type="submit" value="Post" data-mini="true"/>
+                    </div>
+
+                    <div class="ui-field-contain">
+                        <input  name="cash_book_reset" id="cash_book_reset" type="reset" value="Reset"  data-mini="true"/>
+                    </div>
+
+                    <a data-rel="back" name="cash_book_cancel" id="txt_sign_up_cancel" class="ui-btn ui-btn-inline ui-mini ui-corner-all ui-btn-icon-right ui-icon-delete" >Close</a>
+
+
+                </form>
+
+            </div>
+
+
+            <div id="cash-book-import-container"  style="display: none;">
+
+                <form action="transaction/ImportCashBook" id="import-cash-book-form" class="churchapp-form ui-corner-all">
+
+                    <div class="ui-grid-b ui-responsive">
+
+                        <div class="ui-block-a  ui-content">
+
+                        </div>
+                        <div class="ui-block-b ui-content">
+
+                            <input type="hidden" name="import-cash-book-username"  id="import-cash-book-username">
+
+                            <label for="import-cash-book-bank">Bank</label>
+                            <select name="import-cash-book-bank" id="import-cash-book-bank" data-mini="true">
+                                <option value="">Select Bank</option>
+                            </select>
+
+                            <label for="import-cash-book-account-name">Account name</label>
+                            <select name="import-cash-book-account-name" id="import-cash-book-account-name" data-mini="true">
+                                <option value="">Select Account Name</option>
+                            </select>
+
+                            <label for="import-cash-book-account-no">Account no.</label>
+                            <input name="import-cash-book-account-no"  id="import-cash-book-account-no" value="" readonly type="text" data-mini="true">
+
+                            <label for="import-cash-book-file">Cash book (MS Excel file)</label>
+                            <input name="import-cash-book-file"  id="import-cash-book-file"  type="file" data-mini="true">
+
+                            <input name="import-cash-book-submit"  value="Import cash book"  type="submit"  data-mini="true">
+                        </div>
+                        <div class="ui-block-c  ui-content">
+                            <center>
+                                <div id="import-cash-book-busy-display" class="import-cash-book-busy" style="width:150px; height:150px;">
+                                </div>
+                                <div id="import-cash-book-feedback">
+                                    <!--Importing cash book...-->
+                                </div>
+                            </center>
+                        </div>
+
+                    </div><!-- /grid-d -->
+                </form>
+
+            </div>
+
+
+            <div id="cash-book-view-imports-container"  style="display: none;">
+
+                <div id="cash-book-view-imports-table-container" >
+
+                </div>
+
+            </div>
+
+
+            <div id="cash-book-reports-container"  style="display: none;">
+
+                <!-- TODO -->
+
+            </div>
+
+        </div><!-- /content -->
+
+
+        <script>
+
+            $(document).ready(function () {
+                //enter the ids of the tab in the array below according to the nav var arrangement.
+                //the array element can also be an object if you intend to pass  callback
+                //functions upon swipe, in that case the object must have a 'id' member variable name
+                //(the tab id). onTabShow  and onBeforeTabChange are for callback
+                //function
+                var TabIdsStack = ["cash-book-post-container",
+                                    {
+                                        id: "cash-book-import-container",
+                                        onBeforeTabChange : function(){//callback just for demostration purpose anyway.
+                                            return true;//if false the tab will not be changed upon swipe
+                                        }
+                                    },
+                                    {
+                                        id: "cash-book-view-imports-container",
+                                        onTabShow: onViewImportsShow,// callback fuction when tab show on swipe event.
+                                    },
+                                    "cash-book-reports-container"];
+
+                ChurchApp.createSwipeEvents(TabIdsStack);
+
+                var prevSelector = $('#cash-book-post-container');
+                var activeTab = $('[data-tab-content-id="cash-book-post-container"]').find("a");
+                activeTab.addClass('ui-btn-active');
+
+                if (ChurchApp.cash_book_page_nav_content_focus === "import") {
+                    prevSelector = $('#cash-book-import-container');
+                    activeTab.removeClass('ui-btn-active');
+                    activeTab = $('[data-tab-content-id="cash-book-import-container"]').find("a");
+                    activeTab.addClass('ui-btn-active');
+                }
+
+                ChurchApp.cash_book_page_nav_content_focus = "";//initialize
+
+                prevSelector.show();
+                $("[data-role='navbar'] li").on('click', function (event) {
+                    var id = $(this).attr('data-tab-content-id');
+                    var currentSelector = $("#" + id);
+                    //prevSelector.hide();
+                    //currentSelector.show();
+
+                    //Preferrably show this tab and make sure all 
+                    //others are hidden since we use click and swipe
+                    //events to show tabs which could cause conflict.
+                    ChurchApp.showTab(true, id, TabIdsStack);
+
+                    prevSelector = currentSelector;
+
+                    if (id === "cash-book-view-imports-container") {
+                        onViewImportsShow(id);
+                    } else if (id === "cash-book-reports-container") {
+                        onRepotsShow(id);
+                    }
+
+                });
+
+
+                function onViewImportsShow(id) {
+                    //get the imported bank statements
+                    ChurchApp.post("php/query-cash-book-import.php", null,
+                            function (data) {
+                                alert(data);
+                                var json = JSON.parse(data);
+                                if (json.status === "success") {
+                                    handleReceivedImports(json.data);
+                                } else {
+                                    //do something
+                                }
+                            },
+                            function (data, r, error) {
+
+                            });
+                }
+
+                function handleReceivedImports(data) {
+
+                    ChurchApp.createTable(
+                            {
+                                columns: data.table_columns,
+                                data: data.table_data,
+                                uniqueColumn: "IDENTIFIER", // e.g primary key , unique 
+                                selectByCheck: true,
+                                action: true,
+                                /*OR  action: {
+                                 view:true,
+                                 delete:true,
+                                 },*/
+                                container: "cash-book-view-imports-table-container",
+                                filterInputId: "cash-book-view-imports-table-filter",
+                                deleteButton: true,
+                                viewButton: true,
+                                deleteHandler: function (obj) {
+                                    //properties of obj are majorly plural
+                                    var selectedIndices = obj.selectedIndices;//array
+                                    var selectedRows = obj.selectedRows;//two dimension array                                    
+                                    var selectedUniqueValues = obj.selectedUniqueValues;// array of selected unique column values
+
+
+                                    for (var i = 0; i < selectedUniqueValues.length; i++) {
+                                        alert("unique = " + selectedUniqueValues[i]);
+                                    }
+
+                                },
+                                viewHandler: function (obj) {
+                                    //properties of obj are majorly singular
+                                    var selectedIndex = obj.selectedIndex;//number
+                                    var selectedRow = obj.selectedRow;//array (one dimensional) of cell values of the selected row                                
+                                    var selectedUniqueValue = obj.selectedUniqueValue;// value of selected unique column
+
+                                    alert("viewHandler found at " + obj.selectedIndex);
+                                    alert("viewHandler unique " + selectedUniqueValue);
+                                },
+                            });
+                }
+
+                function onRepotsShow(selector) {
+
+                }
+
+
+                ChurchApp.spinPause('import-cash-book-busy-display');
+
+                ChurchApp.remoteComboBoxFill(
+                        {url: "php/get-bank-list.php",
+                            ids: "import-cash-book-bank"}
+                );
+                ChurchApp.remoteComboBoxFill(
+                        {url: "php/get-bank-account-name-list.php",
+                            ids: "import-cash-book-account-name"});
+
+                $("#import-cash-book-bank").on('change', function () {
+                    ChurchApp.remoteTextFill(
+                            {url: "php/get-bank-account-no.php",
+                                ids: "import-cash-book-account-no",
+                                data: {
+                                    "bank": $("#import-cash-book-bank").val(),
+                                    "account_name": $("#import-cash-book-account-name").val(),
+                                },
+                            });
+                });
+
+                $("#import-cash-book-account-name").on('change', function () {
+                    ChurchApp.remoteTextFill(
+                            {url: "php/get-bank-account-no.php",
+                                ids: "import-cash-book-account-no",
+                                data: {
+                                    "bank": $("#import-cash-book-bank").val(),
+                                    "account_name": $("#import-cash-book-account-name").val(),
+                                },
+                            });
+                });
+
+                //add import cash book validation
+                $("#import-cash-book-form").validate({
+                    //validation rules
+                    rules: {
+                        "import-cash-book-bank": "required",
+                        "import-cash-book-account-name": "required",
+                        "import-cash-book-account-no": "required",
+                        "import-cash-book-file": "required",
+                    },
+                    //custom validation message
+                    messages: {
+                    },
+                    submitHandler: function (form) {
+                        ChurchApp.spinRun('import-cash-book-busy-display');
+                        $("import-cash-book-feedback").html("Importing cash book...");
+                        $("import-cash-book-username").val(ChurchApp.user.username);
+
+                        ChurchApp.postForm(form,
+                                function (data) {//done
+                                    ChurchApp.spinPause('import-cash-book-busy-display');
+                                    var json = JSON.parse(data);
+                                    if (json === "success") {
+                                        $("import-cash-book-feedback").html("Imported successfully!");
+                                    } else {
+                                        if (json.msg !== null && json.msg !== "") {
+                                            $("import-cash-book-feedback").html(msg);
+                                        } else {
+                                            $("import-cash-book-feedback").html("Could not imported cash book!");
+                                        }
+                                    }
+
+                                },
+                                function (data, r, error) {//fail
+                                    ChurchApp.spinPause('import-cash-book-busy-display');
+                                    $("import-cash-book-feedback").html("Check your internet connection!"
+                                            + "<br/>Could not import cash book.");
+                                });
+                    }
+
+                });
+
+                //cash book validation
+                $("#cash-book-entry-form").validate({
+                    //validation rules
+                    rules: {
+                        cash_book_date: "required",
+                        cash_book_bank: "required",
+                        cash_book_account_name: "required",
+                        cash_book_description: "required",
+                        cash_book_account_no: "required",
+                        cash_book_tran_code: "required",
+                        cash_book_tran_type: "required",
+                        cash_book_amount: {
+                            required: true,
+                            min: 0
+                        },
+                    },
+                    //custom validation message
+                    messages: {
+                    },
+                    submitHandler: function (form) {
+
+                        ChurchApp.postForm(form,
+                                function (data) {//done
+                                    alert(data);
+                                },
+                                function (data, r, error) {//fail
+
+                                });
+                    }
+
+                });
+
+
+                $(document).bind("pagecreate", function (e, data) {
+                    //do not put click event here
+                });
+
+            });
+
+        </script>
+
+
+    </body>
+</html>

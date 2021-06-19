@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <script>
+            if (typeof $ === "undefined"
+                    || typeof $.mobile === "undefined"
+                    || typeof ChurchApp === "undefined") {
+                //redirect to index page
+                window.location = window.location.protocol + "//" + window.location.host;
+            }
+        </script>
+
+    </head>
+    <body>
+
+        <div data-role="header" style="overflow:hidden;">
+            <h1>Service Income Entry</h1>
+            <a data-rel="back" class="ui-btn ui-btn-left ui-alt-icon ui-nodisc-icon ui-corner-all ui-btn-icon-notext ui-icon-carat-l">Back</a>
+        </div><!-- /header -->
+
+
+        <div class="ui-content">
+
+            <form method="post" action="#" id="service-income-entry-form">
+
+                <div class="ui-grid-b ui-responsive">  
+                    <div class="ui-block-a">
+                        <div class="ui-content">
+                            <label for="service_income_date" >Date:</label>
+                            <input class="date-input"  data-role="date" data-inline="false" name="service_income_date" id="service_income_date" type="date" />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="ui-grid-b  ui-responsive">
+                    <div class="ui-block-a">
+
+                        <div class="ui-content">
+                            <label for="service_income_prepared_by" >Prepared By </label>
+                            <input data-clear-btn="true" name="service_income_prepared_by" id="service_income_prepared_by" type="text"/>
+                        </div>
+                    </div>
+                    <div class="ui-block-b">
+
+                        <div class="ui-content">
+                            <label for="service_income_check_by" >Check by</label>
+                            <input data-clear-btn="true" name="service_income_check_by" id="service_income_check_by" type="text"/>
+                        </div>
+                    </div>
+                    <div class="ui-block-c">
+
+                        <div class="ui-content">
+                            <label for="service_income_received_by" >Received by </label>
+                            <input data-clear-btn="true" name="service_income_received_by" id="service_income_received_by" type="text"/>
+                        </div>
+                    </div>
+                </div>
+
+                <fieldset data-role="collapsible" data-collapsed="false">
+                    <legend>Details</legend>
+
+                    <div class="ui-grid-b ui-responsive">
+
+                        <div class="ui-block-a">
+
+                            <div class="ui-content">  
+                                <select name="service_income_service_type" id="service_income_service_type" data-mini="true">
+                                    <option value="">Type of service</option>
+                                    <!--will be dynamically populated-->
+                                </select>
+
+
+
+                                <label for="service_income_minister" >Minister</label>
+                                <input data-clear-btn="true" name="service_income_minister" id="service_income_minister" type="text"/>
+
+
+
+                                <label for="service_income_message" >Message</label>
+                                <input data-clear-btn="true" name="service_income_message" id="service_income_message" type="text"/>
+                            </div>
+                        </div>
+
+                        <div class="ui-block-b">
+
+                            <div class="ui-content">  
+                                <label for="service_income_male" >No. of male</label>
+                                <input data-clear-btn="true" name="service_income_male" id="service_income_male" type="number"/>
+
+                                <label for="service_income_female" >No. of female</label>
+                                <input data-clear-btn="true" name="service_income_female" id="service_income_female" type="number"/>
+
+
+
+                                <label for="service_income_female" >No. of children</label>
+                                <input data-clear-btn="true" name="service_income_female-name" id="service_income_female" type="number"/>
+                            </div>
+                        </div>
+
+                        <div class="ui-block-c">
+                            <div class="ui-content">
+
+                                <label for="service_income_first_timers" >No. of first timers</label>
+                                <input data-clear-btn="true" name="service_income_first_timers" id="service_income_first_timers" type="number"/>
+
+
+
+                                <label for="service_income_new_converts" >No. of new converts</label>
+                                <input data-clear-btn="true" name="service_income_new_converts" id="service_income_new_converts" type="number"/>
+
+
+                                <div class="ui-grid-a ui-responsive">
+                                    <div class="ui-block-a">
+
+
+                                        <input name="service_income_details_save" id="service_income_details_save" value="Save" type="button"/>
+
+                                    </div>  
+                                    <div class="ui-block-b">
+
+
+                                        <input name="service_income_details_edit" id="service_income_details_edit" value="Edit" type="button"/>
+
+                                    </div>    
+                                </div>
+
+                            </div>   
+                        </div>
+
+                    </div><!-- /grid-b -->
+
+                </fieldset>
+
+                <div data-role="collapsibleset"> 
+                    <div data-role="collapsible">
+                        <h3>Cash</h3>
+
+                        <div class="ui-grid-a ui-responsive">
+
+                            <div class="ui-block-a">
+                                <div  class="ui-content">
+                                    <select name="service_income_income_type" id="service_income_income_type" data-mini="true">
+                                        <option value="">Type of income</option>
+
+                                    </select>
+
+
+                                    <label for="service_income_notes" >No. of note</label>
+                                    <input data-clear-btn="true" name="service_income_notes" id="service_income_notes" type="number"/>
+
+                                    <select name="service_income_denomination" id="service_income_denomination" data-mini="true">
+                                        <option value="">Currency denomination</option>
+
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="ui-block-b">
+
+                                <div class="ui-content">
+                                    <label for="service_income_cash_amount" >Amount</label>
+                                    <input data-clear-btn="true" name="service_income_cash_amount-name" id="service_income_cash_amount" type="number"/>
+
+                                    <label for="service_income_cash_amount_in_words" >Amount in words</label>
+                                    <textarea data-clear-btn="true" cols="40" rows="8" readonly="readonly" name="service_income_amount_in_words" id="service_income_amount_in_words"  ></textarea>
+
+                                    <input  name="service_income_cash_send" id="service_income_cash_send" type="submit" value="Send" data-mini="true"/>
+                                </div>
+                            </div>
+
+                        </div><!-- /grid-b -->
+
+                    </div>
+
+                    <div data-role="collapsible">
+                        <h3>Cheque</h3>
+
+                        <div class="ui-grid-a ui-responsive">
+
+                            <div class="ui-block-a">
+                                <div class="ui-content">
+                                    <select name="service_income_cheque_income_type" id="service_income_cheque_income_type" data-mini="true">
+                                        <option value="">Type of income</option>
+
+                                    </select>
+
+
+                                    <label for="service_income_cheque_bank" >Bank</label>
+                                    <input data-clear-btn="true" name="service_income_cheque_bank" id="service_income_cheque_bank" type="text"/>
+
+                                    <label for="service_income_cheque_no" >Cheque no.</label>
+                                    <input data-clear-btn="true" name="service_income_cheque_no" id="service_income_cheque_no" type="text"/>
+                                </div>
+
+                            </div>
+
+                            <div class="ui-block-b">
+
+                                <div class="ui-content">
+                                    <label for="service_income_cheque_amount" >Amount</label>
+                                    <input data-clear-btn="true" name="service_income_cheque_amount" id="service_income_cheque_amount" type="number"/>
+
+                                    <label for="cash_book_date" >Date to be cleared</label>
+                                    <input class="date-input"  data-role="date" data-inline="false" name="cash_book_date" id="cash_book_date" type="date"/>
+
+                                    <label for="service_income_cheque_amount_in_words" >Amount in words</label>
+                                    <textarea data-clear-btn="true" cols="40" rows="8" readonly="readonly" name="service_income_amount_in_words" id="service_income_amount_in_words"  ></textarea>
+
+                                    <input  name="service_income_cheque_send" id="service_income_cheque_send" type="submit" value="Send" data-mini="true"/>
+                                </div>
+
+                            </div>
+
+                        </div><!-- /grid-b -->
+
+                    </div>
+                </div>
+
+            </form>
+
+        </div>
+
+        <script>
+
+
+            $(document).ready(function () {
+
+                $(document).bind("pagecreate", function (e, data) {
+
+                    //populate necessary combo boxes
+                    if ($("#service_income_service_type option").length <= 1) {
+                        ChurchApp.remoteComboBoxFill(
+                                {url: "php/get-service-type-list.php",
+                                    ids: "service_income_service_type"});
+                    }
+
+                    if ($("#service_income_income_type option").length <= 1) {
+                        //same for service_income_cheque_income_type
+                        ChurchApp.remoteComboBoxFill(
+                                {url: "php/get-service-income-category-list.php",
+                                    ids: ["service_income_income_type", "service_income_cheque_income_type"]});
+                    }
+
+                    if ($("#service_income_denomination option").length <= 1) {
+                        ChurchApp.remoteComboBoxFill(
+                                {url: "php/get-denominations-list.php",
+                                    ids: "service_income_denomination"});
+                    }
+
+
+                });
+            });
+
+
+        </script>
+
+
+    </body>
+</html>

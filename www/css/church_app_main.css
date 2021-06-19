@@ -1,0 +1,88 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : May 15, 2016, 3:53:15 PM
+    Author     : chuks
+*/
+
+.churchapp-input-readonly{
+    background-color: #eeeeee !important;
+    cursor: not-allowed !important;
+}
+
+.churchapp-left-panel{
+    background-color: #3fa65b !important;
+    color: #eeeeee !important;
+}
+
+.churchapp-left-panel-header{
+ margin-bottom: 20px !important;
+ height: 10em; 
+ //background-color: #00415e;   //testing!!!
+}
+
+
+.churchapp-left-panel-header > div{
+
+ //background-color: #0033cc;   //testing!!
+}
+
+.churchapp-form{
+    background-color:#abd590;
+    padding: 0.25em;
+}
+
+.fixed-nav-top{
+    position: fixed;
+    top: 0px;
+    z-index: 1000;
+    margin-top: 0px !important;
+    width: 100%;
+}
+
+.menu-fixed{
+    position: fixed;
+    z-index: 1001;
+}
+
+.home_left_menu_above{
+    margin-bottom: -1px !important;
+}
+
+.home_menu_adjust{
+    margin-right: 0px;margin-left: 0px;
+}
+
+.home-page-nav{
+    margin-top:30px;
+}
+
+.churchapp-division{
+    //background-color: #d0d0d0;
+    margin: 0.125em;
+    padding: 0.25em;
+    border-left-color: #abd590;
+}
+
+.table-report-view thead th,
+.table-report-view tbody tr:last-child {
+    border-bottom: 1px solid #d6d6d6; /* non-RGBA fallback */
+    border-bottom: 1px solid rgba(0,0,0,.1);
+}
+.table-report-view tbody th,
+.table-report-view tbody td {
+    border-bottom: 1px solid #e6e6e6; /* non-RGBA fallback  */
+    border-bottom: 1px solid rgba(0,0,0,.05);
+}
+.table-report-view tbody tr:last-child th,
+.table-report-view tbody tr:last-child td {
+    border-bottom: 0;
+}
+.table-report-view tbody tr:nth-child(odd) td,
+.table-report-view tbody tr:nth-child(odd) th {
+    background-color: #eeeeee; /* non-RGBA fallback  */
+    background-color: rgba(0,0,0,.04);
+}

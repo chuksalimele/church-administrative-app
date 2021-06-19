@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <script>
+            if (typeof $ === "undefined"
+                    || typeof $.mobile === "undefined"
+                    || typeof ChurchApp === "undefined") {
+                //redirect to index page
+                window.location = window.location.protocol + "//" + window.location.host;
+            }
+        </script>
+
+    </head>
+    <body>
+
+        <div data-role="header" style="overflow:hidden;">
+            <a data-rel="back" class="ui-btn ui-btn-left ui-alt-icon ui-nodisc-icon ui-corner-all ui-btn-icon-notext ui-icon-carat-l">Back</a>
+            <h1>Register Parish/Super Admin</h1>
+        </div><!-- /header -->
+
+        <div class="ui-content">
+
+            <form method="post" action="php/RegisterParishAndSuperAdmin.php" id="register-parish-form">
+
+                <div class="custom-corners">
+                    <div class="ui-bar ui-bar-a">
+                        <h3>Parish Super Admin</h3>
+                    </div>
+
+                    <div class="ui-body ui-body-a"> 
+                        <div class="ui-grid-b ui-responsive">
+
+                            <div class="ui-block-a">
+                                <div class="ui-content">
+                                    <label for="register-parish-admin-first-name" >First name </label>
+                                    <input data-clear-btn="true" name="register-parish-admin-first-name" id="register-parish-admin-first-name" type="text"/>
+
+
+
+                                    <label for="register-parish-admin-last-name" >Last name </label>
+                                    <input data-clear-btn="true" name="register-parish-admin-last-name" id="register-parish-admin-last-name" type="text"/>
+
+
+                                    <label for="register-parish-admin-username" >Username </label>
+                                    <input data-clear-btn="true" name="register-parish-admin-username" id="register-parish-admin-username" type="text"/>
+                                </div>
+                            </div>
+                            <div class="ui-block-b">
+
+                                <div class="ui-content">
+                                    <label for="register-parish-admin-password" >Password </label>
+                                    <input data-clear-btn="true" name="register-parish-admin-password" id="register-parish-admin-password" type="password"/>
+
+
+
+                                    <label for="register-parish-admin-password-again" >Password again </label>
+                                    <input data-clear-btn="true" name="register-parish-admin-password-again" id="register-parish-admin-password-again" type="password"/>
+
+
+
+                                    <label for="register-parish-admin-email" >Email </label>
+                                    <input data-clear-btn="true" name="register-parish-admin-email" id="register-parish-admin-email" type="text"/>
+                                </div>
+                            </div>
+                            <div class="ui-block-c">
+
+                                <div class="ui-content">
+                                    <br/>
+                                    <input data-mini="false" name="btn-register-parish-admin-verify-email" id="btn-register-parish-admin-verify-email" type="button" value="Verify email"/>
+
+
+
+                                    <label for="register-parish-admin-email-verification-code" >Verification code </label>
+                                    <input data-clear-btn="true" name="register-parish-admin-email-verification-code" id="register-parish-admin-email-verification-code" type="text"/>
+
+
+
+                                    <div id="register-parish-admin-email-feedback">
+                                    </div>                                
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="custom-corners">
+                    <div class="ui-bar ui-bar-a">
+                        <h3>Parish</h3>
+                    </div>
+
+                    <div class="ui-body ui-body-a"> 
+                        <div class="ui-field-contain">
+                            <label for="register-parish-name" >Name of parish </label>
+                            <input data-clear-btn="true" name="register-parish-name" id="register-parish-name" type="text"/>
+                        </div>
+
+                        <div class="ui-field-contain">
+                            <label for="register-parish-address" >Address of parish</label>
+                            <input data-clear-btn="true" name="register-parish-address" id="register-parish-address" type="text"/>
+                        </div>
+
+                        <div class="ui-field-contain">
+                            <label for="register-parish-country" >Country </label>
+                            <select name="register-parish-country" id="register-parish-country" data-mini="true">
+                                <option value="">Select country</option>
+                                <option value="Nigeria">Nigeria</option>
+                                <option value="Ghana">Ghana</option>
+                                <option value="England">England</option>
+                                <option value="United States">United States</option>
+                                <!-- come back for more country list--->
+                            </select>
+                        </div>
+
+                        <div class="ui-field-contain">
+                            <label for="register-parish-head-of" >Head of </label>
+                            <select name="register-parish-head-of" id="register-parish-head-of" data-mini="true" onchange="onRegisterParishHeadOf(this)">
+                                <option value="">Select division category</option>
+                                <option value="Area">Area</option>
+                                <option value="Zone">Zone</option>
+                                <option value="Province">Province</option>
+                                <option value="Region">Region</option>
+                                <option value="National">National</option>
+                            </select>
+                        </div>
+
+                        <div class="ui-corner-all churchapp-division">
+                            <div class="ui-field-contain" id="register-parish-division-name-cont" style="display: none;">
+                                <label for="register-parish-division-name">Name of division</label>
+                                <input data-clear-btn="true" name="register-parish-division-name" id="register-parish-division-name" type="text"/>
+                            </div>
+
+                            <div class="ui-field-contain"  id="register-parish-under-area-cont">
+                                <label for="register-parish-under-area">Under area</label>
+                                <input data-clear-btn="true" name="register-parish-under-area" id="register-parish-under-area" type="text"/>
+                            </div>
+
+                            <div class="ui-field-contain" id="register-parish-under-zone-cont">
+                                <label for="register-parish-under-zone">Under zone</label>
+                                <input data-clear-btn="true" name="register-parish-under-zone" id="register-parish-under-zone" type="text"/>
+                            </div>
+
+                            <div class="ui-field-contain" id="register-parish-under-province-cont">
+                                <label for="register-parish-under-province">Under province</label>
+                                <input data-clear-btn="true" name="register-parish-under-province" id="register-parish-under-province" type="text"/>
+                            </div>
+
+                            <div class="ui-field-contain" id="register-parish-under-region-cont">
+                                <label for="register-parish-under-region">Under region</label>
+                                <input data-clear-btn="true" name="register-parish-under-region" id="register-parish-under-region" type="text"/>
+                            </div>
+
+                            <div class="ui-field-contain" id="register-parish-under-national-cont">
+                                <label for="register-parish-under-national">Under national</label>
+                                <input data-clear-btn="true" name="register-parish-under-national" id="register-parish-under-national" type="text"/>
+                            </div>
+                        </div>
+
+                    </div>  
+
+                    <div class="ui-field-contain">
+                        <input  name="register-parish-register" id="register-parish-register" type="submit" value="Register" data-mini="true"/>
+                    </div>
+                </div>
+            </form>
+
+        </div>
+
+        <script>
+
+
+            $(document).ready(function () {
+
+                ChurchApp.adminVerifyCode.init();
+
+                $("#btn-register-parish-admin-verify-email").on("click", function (evt) {
+
+                    if ($("#register-parish-admin-email").val() === "") {
+                        alert("Please enter email.");
+                        return;
+                    }
+
+                    if ($("#register-parish-admin-username").val() === "") {
+                        alert("Please enter username.");
+                        return;
+                    }
+
+                    if ($("#register-parish-admin-first-name").val() === "") {
+                        alert("Please enter first name.");
+                        return;
+                    }
+
+                    if ($("#register-parish-admin-last-name").val() === "") {
+                        alert("Please enter last name.");
+                        return;
+                    }
+
+                    //disable to prevent another operation until we receive feedback from the server
+                    $("#btn-register-parish-admin-verify-email").attr("disabled", true);
+
+                    $("#register-parish-admin-email-feedback").html("");
+
+
+
+                    $.mobile.loading("show", {
+                        text: "Sending verification code. Please wait... ",
+                        textVisible: true,
+                        theme: "a",
+                        textonly: false,
+                        html: ""
+                    });
+
+                    ChurchApp.post("php/SendAdminEmailVerify.php",
+                            {
+                                firstName: $("#register-parish-admin-first-name").val(),
+                                lastName: $("#register-parish-admin-last-name").val(),
+                                username: $("#register-parish-admin-username").val(),
+                                email: $("#register-parish-admin-email").val(),
+                            },
+                            function (data) {//done
+
+                                //alert(data);
+
+                                //enable the operation
+                                $("#btn-register-parish-admin-verify-email").attr("disabled", false);
+
+                                $.mobile.loading("hide");
+                                var json = JSON.parse(data);
+
+                                if (json.status === "success") {
+
+                                    ChurchApp.adminVerifyCode.username = json.data.username;
+                                    ChurchApp.adminVerifyCode.email = json.data.email;
+                                    ChurchApp.adminVerifyCode.code = json.data.verificationCode;
+
+                                    document.getElementById("register-parish-admin-email-feedback").style.color = "black";
+                                    $("#register-parish-admin-email-feedback").html("Verification code  has been sent to your email!<br/>" +
+                                            "Please enter in feild above.");
+                                } else if (json.status === "error") {
+                                    document.getElementById("register-parish-admin-email-feedback").style.color = "red";
+                                    $("#register-parish-admin-email-feedback").html("Failed to send verification code!");
+                                } else {
+                                    ChurchApp.alertResponse(json);
+                                }
+
+                            },
+                            function (data, r, error) {//fail
+                                $.mobile.loading("hide");
+                                //enable the operation
+                                $("#btn-register-parish-admin-verify-email").attr("disabled", false);
+                                document.getElementById("register-parish-admin-email-feedback").style.color = "red";
+                                $("#register-parish-admin-email-feedback").html("Failed to send verification code.<br/>Check internet connection!");
+                            });
+                });
+
+
+
+                //parish register validation
+                $("#register-parish-form").validate({
+                    //validation rules
+                    rules: {
+                        "register-parish-name": "required",
+                        "register-parish-address": "required",
+                        "register-parish-country": "required",
+                        "register-parish-admin-first-name": "required",
+                        "register-parish-admin-last-name": "required",
+                        "register-parish-admin-username": {
+                            required: true,
+                            minlength: 3,
+                            checkUsernameVerificationCodePair: true, //custom validation method name - see above
+                            remote: {
+                                url: "php/check-username.php",
+                                type: "post",
+                                data: {
+                                    txt_sign_up_username: function () {
+                                        return $("#register-parish-admin-username").val();
+                                    }
+                                }
+                            }
+                        },
+                        "register-parish-admin-password": {
+                            required: true,
+                            minlength: 6
+                        },
+                        "register-parish-admin-email": {
+                            required: true,
+                            email: true,
+                            checkEmailVerificationCodePair: true, //custom validation method name - see above
+                        },
+                        "register-parish-admin-password-again": {
+                            required: true,
+                            equalTo: "#register-parish-admin-password"
+                        },
+                        "register-parish-admin-email-verification-code": {
+                            required: true,
+                            checkVerificationCode: true, //custom validation method name - see above
+                        },
+                        "register-parish-division-name": {
+                            enterFieldShowing: true, //custom validation method name - see above
+                        },
+                        "register-parish-under-area": {
+                            enterFieldShowing: true, //custom validation method name - see above
+                        },
+                        "register-parish-under-zone": {
+                            enterFieldShowing: true, //custom validation method name - see above
+                        },
+                        "register-parish-under-province": {
+                            enterFieldShowing: true, //custom validation method name - see above
+                        },
+                        "register-parish-under-region": {
+                            enterFieldShowing: true, //custom validation method name - see above
+                        },
+                        "register-parish-under-national": {
+                            enterFieldShowing: true, //custom validation method name - see above
+                        }
+                    },
+                    //custom validation message
+                    messages: {
+                        "register-parish-admin-password-again": "Passwords did not match!",
+                        "register-parish-admin-username": {
+                            remote: "Username already taken!"
+                        },
+                        "register-parish-admin-email": {
+                            email: "Invalid email address - e.g name@domain.com"
+                        }
+                    },
+                    submitHandler: function (form) {
+
+                        ChurchApp.postForm(form,
+                                function (data) {//done
+                                    ChurchApp.adminVerifyCode.init();
+
+                                    alert(data);
+                                },
+                                function (data, r, error) {//fail
+
+                                });
+                    }
+
+                });
+
+
+                $(document).bind("pagecreate", function (e, data) {
+                    
+                });
+            });
+
+        </script>
+
+    </body>
+</html>

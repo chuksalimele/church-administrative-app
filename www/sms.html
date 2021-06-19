@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>SMS</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <script>
+            if (typeof $ === "undefined"
+                    || typeof $.mobile === "undefined"
+                    || typeof ChurchApp === "undefined") {
+                //redirect to index page
+                window.location = window.location.protocol + "//" + window.location.host;
+            }
+        </script>
+
+    </head>
+    <body>
+
+        <div data-role="header" style="overflow:hidden;">
+            <a data-rel="back" class="ui-btn ui-btn-left ui-alt-icon ui-nodisc-icon ui-corner-all ui-btn-icon-notext ui-icon-carat-l">Back</a>
+            <h1>SMS</h1>
+        </div><!-- /header -->
+
+        <div class="ui-content">
+            <div  data-role="collapsibleset" data-theme="a" data-content-theme="a">
+                <div data-role="collapsible">
+                    <h3>Send SMS</h3>
+                    <form method="post" action="#" id="send-sms-form">
+
+                        <div class="ui-grid-a  ui-responsive">
+                            <div class="ui-block-a">
+                                <div class="ui-content">
+                                    <label for="send-sms-title" >Title</label>
+                                    <input data-clear-btn="true" name="send-sms-title" id="send-sms-title" type="text" />
+
+                                    <label for="send-sms-message" >Message</label>
+                                    <textarea data-clear-btn="true" name="send-sms-message" id="send-sms-message" ></textarea>
+
+                                    <label for="send-sms-phone-nos" >Phone numbers (separate by comma if more than one)</label>
+                                    <textarea data-clear-btn="true" name="send-sms-phone-nos" id="send-sms-phone-nos" ></textarea>
+
+                                    <input type="submit" value="Send"/>
+                                    <input type="submit" value="Save"/>
+                                </div>
+
+                            </div>
+
+                            <div class="ui-block-b">
+                                <div class="ui-content">
+                                    <input id="send-sms-find-phone-nos" type="button" value="Find phone numbers"/>
+                                </div>
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+
+                <div data-role="collapsible">
+                    <h3>Saved Messages</h3>
+
+                    <div>
+                        <!--put content here-->
+                    </div>
+
+                </div>
+
+                <div data-role="collapsible">
+                    <h3>SMS History</h3>
+
+                    <div>
+                        <!--put content here-->
+                    </div>
+
+                </div>
+
+                <div data-role="collapsible">
+                    <h3>Buy Units</h3>
+
+                    <div>
+                        <!--put content here-->
+                    </div>
+
+                </div>
+
+
+                <div data-role="collapsible">
+                    <h3>Payment History</h3>
+
+                    <div>
+                        <!--put content here-->
+                    </div>
+
+                </div>
+
+                <div data-role="collapsible">
+                    <h3>Usage</h3>
+
+                    <div>
+                        <!--put content here-->
+                    </div>
+
+                </div></div>
+
+        </div>
+
+        <script>
+
+            $(document).ready(function () {
+
+                $("#send-sms-find-phone-nos").on('click', function () {
+                    var body = "<div class='ui-content'>"
+                            + "Filter:"
+                            + "<select>"
+                            + "<option>All</option>"
+                            + "<option>Accountants</option>"
+                            + "<option>Admins</option>"
+                            + "<option>Children</option>"
+                            + "<option>Men</option>"
+                            + "<option>Men Excos</option>"
+                            + "<option>Pastors</option>"
+                            + "<option>Workers</option>"
+                            + "<option>Women</option>"
+                            + "<option>Women Excos</option>"
+                            + "<option>Youths</option>"
+                            + "<option>Youth Excos</option>"
+                            + "</select>"
+                            + "<select>"
+                            + "<option>Pick first number of user</option>"
+                            + "<option>Pick random number of user</option>"
+                            + "<option>Pick all numbers of user</option>"
+                            + "</select>"
+                            + ChurchApp.createTableHtml(
+                                    {
+                                        columns: ["col_1", "col_2", "col_3"],
+                                        data: [["a1", "a2", "a3"], ["b1", "b2", "b3"], ["c1", "c2", "c3"]],
+                                        selectByCheck: true,
+                                    })
+                            + "</div>";
+
+                    ChurchApp.createPopup({
+                        header: "<h3>Select Users Phone Numbers</h3>",
+                        body: body,
+                        footer: "<div></div>",
+                        closeButtonPos: "right",
+                    });
+
+                });
+
+                $(document).bind("pagecreate", function (e, data) {
+                    //do not put click event here
+                });
+
+            });
+
+
+        </script>
+
+    </body>
+</html>

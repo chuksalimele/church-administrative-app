@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>Account Reconciliation</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <script>
+            if (typeof $ === "undefined"
+                    || typeof $.mobile === "undefined"
+                    || typeof ChurchApp === "undefined") {
+                //redirect to index page
+                window.location = window.location.protocol + "//" + window.location.host;
+            }
+        </script>
+
+    </head>
+    <body>
+
+        <div data-role="header" data-theme="a">
+            <a  data-rel="back" data-icon="arrow-l" data-iconpos="notext" data-shadow="false" data-icon-shadow="false">Back</a>
+            <h2 data-church-table-name="table-view-page">Account Reconciliation</h2>
+        </div><!-- /header -->
+        <div role="main" class="ui-content">
+            <form action="php/account-reconcile.php" id="account-reconcile-form" class="churchapp-form ui-corner-all">
+
+                <div class="ui-grid-c ui-responsive">
+
+                    <div class="ui-block-a">
+                        <label for="account_reconcile_bank">Bank</label>
+                        <select name="account_reconcile_bank" id="account_reconcile_bank" data-mini="true">
+                            <option value="">Select Bank</option>
+                        </select>
+                    </div>
+                    <div class="ui-block-b">
+                        <label for="account_reconcile_account_name">Account name</label>
+                        <select name="account_reconcile_account_name" id="account_reconcile_account_name" data-mini="true">
+                            <option value="">Select Account Name</option>
+                        </select>
+                    </div>
+                    <div class="ui-block-c">
+                        <label for="account_reconcile_account_no">Account no.</label>
+                        <input name="account_reconcile_account_no"  id="account_reconcile_account_no" value="" readonly type="text" data-mini="true">
+                    </div>
+                    <div class="ui-block-d">
+                        <label for="account_reconcile_month_year">Statement period </label>
+                        <select name="account_reconcile_month_year" id="account_reconcile_month_year" data-mini="true">
+                            <option value="">Select Month/Year</option>
+                        </select>
+                    </div>
+                    <div class="ui-block-a">
+                    </div>
+                    <div class="ui-block-b">
+
+                    </div>
+                    <div class="ui-block-c">
+
+                    </div>
+                    <div class="ui-block-d">
+                        <input name="account_reconcile_submit"  value="Reconcile"  type="submit"  data-mini="true">
+                    </div>
+                </div><!-- /grid-d -->
+            </form>
+
+            <form>
+                <div data-role="controlgroup" data-type="horizontal" data-mini="true" >
+                    <h3>Reconciliation status</h3>
+                    <!--DO NOT CHANGE THE value of the name and id attributes in this controlgroup! e.g DO NOT CHANGE radio-choice-h-6a, radio-choice-h-6 AND THE LIKES PLEASE  -->
+                    <label for="radio-choice-h-6a">Reconciliation</label>
+                    <input name="radio-choice-h-6" id="radio-choice-h-6a" value="Reconciliation" checked="checked" type="radio">
+
+                    <label for="radio-choice-h-6b">Missing</label>
+                    <input name="radio-choice-h-6" id="radio-choice-h-6b" value="Missing" type="radio">
+
+                    <label for="radio-choice-h-6c">Unknown</label>
+                    <input name="radio-choice-h-6" id="radio-choice-h-6c" value="Unknown" type="radio">
+
+                    <label for="radio-choice-h-6d">Conflicting</label>
+                    <input name="radio-choice-h-6" id="radio-choice-h-6d" value="Conflicting" type="radio">
+                </div>
+            </form>
+
+            <div id="reconcile-transaction-render">
+
+            </div>
+
+        </div><!-- /content -->
+
+
+        <script>
+
+            $(document).ready(function () {
+
+                /*$(".monthPicker").datepicker({
+                    dateFormat: 'MM yy',
+                    changeMonth: true,
+                    changeYear: true,
+                    showButtonPanel: true,
+                    onClose: function (dateText, inst) {
+                        var month = $("#ui-datepicker-div .ui-datepicker-month :selected").val();
+                        var year = $("#ui-datepicker-div .ui-datepicker-year :selected").val();
+                        $(this).val($.datepicker.formatDate('MM yy', new Date(year, month, 1)));
+                    }
+                });
+
+                $(".monthPicker").focus(function () {
+                    $(".ui-datepicker-calendar").hide();
+                    $("#ui-datepicker-div").position({
+                        my: "center top",
+                        at: "center bottom",
+                        of: $(this)
+                    });
+                });*/
+
+                //validation
+                $("#account-reconcile-form").validate({
+                    //validation rules
+                    rules: {
+                        account_reconcile_bank: "required",
+                        account_reconcile_account_name: "required",
+                        account_reconcile_account_no: "required",
+                        account_reconcile_month_year: "required"
+                    },
+                    //custom validation message
+                    messages: {
+                    },
+                    //submit login form
+                    submitHandler: function (form) {
+
+                        ChurchApp.postForm(form,
+                                function (data) {//done
+                                    var json = JSON.parse(data);
+
+                                    ChurchApp.renderAccountReconcile({
+                                        //pageId deprecated
+                                        pageId: "", //must be the page id
+
+                                        cashBookColumns: json.data.cash_book.columns,
+                                        cashBookData: json.data.cash_book.table_data,
+                                        cashBookBalanceBF: json.data.cash_book.balance_bf,
+                                        bankStatementData: json.data.bank_statement.table_data,
+                                        bankStatementColumns: json.data.source_columns,
+                                        bankStatementBalanceBF: json.data.bank_statement.balance_bf,
+                                        dataRenderDiv: "reconcile-transaction-render", //can be the div it self or the div id - where cash book, statement and reconciliation statement will be renderred
+
+                                        reconcileTransactionButton: "radio-choice-h-6a", //can be the button (but preferrably radio) itself or the id - click to show reconciliation statement
+                                        missingTransactionButton: "radio-choice-h-6b", //can be the button (but preferrably radio) itself or the id - click to show missing transactions
+                                        unknownTransactionButton: "radio-choice-h-6c", //can be the button (but preferrably radio) itself or the id - click to show unknown transactions
+                                        conflictingTransactionButton: "radio-choice-h-6d", //can be the button (but preferrably radio) itself or the id - click to show conficting transactions
+
+                                        bank: json.data.bank,
+                                        accountName: json.data.account_name,
+                                        accountNo: json.data.account_no,
+                                        statementPeriod: json.data.statement_period,
+                                    });
+
+                                },
+                                function (data, r, error) {//fail
+                                    alert("error");
+                                });
+                    }
+
+                });
+
+                $(document).on("pagecreate", function () {
+
+                });
+
+
+            });
+
+        </script>
+
+
+    </body>
+</html>

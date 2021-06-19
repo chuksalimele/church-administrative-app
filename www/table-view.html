@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>Monetary</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <script>
+            if (typeof $ === "undefined"
+                    || typeof $.mobile === "undefined"
+                    || typeof ChurchApp === "undefined") {
+                //redirect to index page
+                window.location = window.location.protocol+"//"+window.location.host;
+            }
+        </script>
+       
+    </head>
+    <body>
+        <div data-role="header">
+            <a  data-rel="back" data-icon="arrow-l" data-iconpos="notext" data-shadow="false" data-icon-shadow="false">Back</a>
+            <h1 data-church-table-name="table-view-page"></h1>
+        </div><!-- /header -->
+        <div role="main" id="table-view-page-content" class="ui-content">
+
+        </div><!-- /content -->
+
+    </body>
+</html>
